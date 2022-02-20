@@ -1,10 +1,10 @@
 #Project We
 
-##Pre-requisite
+## Pre-requisite
 1. Postgresql installed
 2. golang v 1.17.0++
 
-##configuration
+## configuration
 - all configuration there is in file ```/conf/app.conf```
 - you can modify this especially for database config
 - create database based on database name in ```/conf/app.conf```
