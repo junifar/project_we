@@ -14,13 +14,16 @@ type Deliveries struct {
 	User     useruc.IUser
 }
 
+// Usecase is usecase dependencies
+type Usecase struct {
+	LocationUC locationuc.ILocation
+	UserUC     useruc.IUser
+}
+
 // New is delivery constructor
-func New(
-	location locationuc.ILocation,
-	User useruc.IUser,
-) *Deliveries {
+func New(usecase Usecase) *Deliveries {
 	return &Deliveries{
-		Location: location,
-		User:     User,
+		Location: usecase.LocationUC,
+		User:     usecase.UserUC,
 	}
 }

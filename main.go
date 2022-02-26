@@ -4,15 +4,12 @@ import (
 	"github.com/beego/beego/v2/adapter/orm"
 	"github.com/beego/beego/v2/core/logs"
 	"github.com/beego/beego/v2/server/web"
+
+	"project_we/app/repository"
+	"project_we/app/usecase"
 	"project_we/delivery"
 	"project_we/function"
 	"project_we/route"
-
-	locationrpi "project_we/app/repository/location/impl"
-	userrpi "project_we/app/repository/user/impl"
-
-	locationuci "project_we/app/usecase/location/impl"
-	useruci "project_we/app/usecase/user/impl"
 )
 
 func init() {
@@ -24,28 +21,25 @@ func init() {
 }
 
 func main() {
-
 	orms := orm.NewOrm()
 
 	logs.Info("initialize repository")
-	locationRP := locationrpi.New(orms)
-	logs.Info("initialize repository location")
-	userRP := userrpi.New(orms)
-	logs.Info("initialize repository user")
+	rpList := repository.Init(repository.Dependencies{ORM: orms})
 
 	logs.Info("initialize usecase")
-	locationUC := locationuci.New(locationRP)
-	logs.Info("initialize usecase location")
-	userUC := useruci.New(userRP)
-	logs.Info("initialize usecase user")
+	ucList := usecase.Init(usecase.Repository{
+		LocationRP: rpList.LocationRP,
+		UserRP:     rpList.UserRP,
+	})
 
 	// initialize delivery
-	delivery := delivery.New(locationUC, userUC)
+	deliveries := delivery.New(delivery.Usecase{
+		LocationUC: ucList.LocationUC,
+		UserUC:     ucList.UserUC,
+	})
 	logs.Info("initialize delivery")
 
-	route.Common(delivery)
-	route.Location(delivery)
-	route.User(delivery)
+	route.Init(deliveries)
 
 	web.Run()
 }
