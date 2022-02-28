@@ -8,9 +8,15 @@ import (
 
 // IUser is user usecase interface
 type IUser interface {
-	Personel
+	IPersonel
+	ISession
 }
 
-type Personel interface {
+type IPersonel interface {
 	CreatePersonel(ctx *context.Context, req model.Personals) (err errors.IError)
+	CheckAdmin(ctx *context.Context, req model.Personals) (res bool, errs errors.IError)
+}
+
+type ISession interface {
+	CheckSession(ctx *context.Context, cookie string) (res model.Personals, err errors.IError)
 }

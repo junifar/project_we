@@ -28,3 +28,10 @@ func (impl *UserUsecase) CreatePersonel(ctx *context.Context, req model.Personal
 
 	return nil
 }
+
+func (impl *UserUsecase) CheckAdmin(ctx *context.Context, req model.Personals) (res bool, errs errors.IError) {
+	if req.UserTypeId == constant.PersonalTypeAdminID {
+		res = true
+	}
+	return
+}
