@@ -22,6 +22,26 @@ func (impl *Deliveries) CheckSession(ctx *context.Context) errors.IError {
 	return nil
 }
 
+func (impl *Deliveries) CheckLecturer(ctx *context.Context) errors.IError {
+	cookie, valid := ctx.GetSecureCookie(constant.CookieSecret, constant.CookieName)
+	if !valid {
+		return errors.New(constant.ErrorUnauthorized)
+	}
+
+	personalData, err := impl.User.CheckSession(ctx, cookie)
+	if err != nil {
+		return errors.New(constant.ErrorUnauthorized)
+	}
+
+	isLecturer, err := impl.User.CheckLecturer(ctx, personalData)
+	if err != nil || !isLecturer {
+		return errors.New(constant.ErrorNoPermission)
+	}
+
+	ctx.Input.SetData(constant.ContextUserID, personalData.ID)
+	return nil
+}
+
 func (impl *Deliveries) CheckAdmin(ctx *context.Context) errors.IError {
 	cookie, valid := ctx.GetSecureCookie(constant.CookieSecret, constant.CookieName)
 	if !valid {

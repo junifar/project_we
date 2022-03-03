@@ -28,18 +28,19 @@ func (impl *UserUsecase) ListPersonel(ctx *context.Context, req model.PersonalsP
 		if req.Page-1 >= 0 {
 			res.PreviousPage = req.Page - 1
 		}
+		res.Personals = resData[:len(resData)-1]
 	} else {
 		if req.Page-1 >= 0 {
 			res.PreviousPage = req.Page - 1
 		}
+		res.Personals = resData
 	}
-	res.Personals = resData[:len(resData)-1]
 	return
 }
 
 func (impl *UserUsecase) CreatePersonel(ctx *context.Context, req model.Personals) (errs errors.IError) {
 	// TODO validate user input
-	userID := int64(0)
+	userID := ctx.Input.GetData(constant.ContextUserID).(int64)
 
 	now := time.Now()
 
@@ -57,8 +58,29 @@ func (impl *UserUsecase) CreatePersonel(ctx *context.Context, req model.Personal
 	return nil
 }
 
+func (impl *UserUsecase) CurrentUser(ctx *context.Context, req model.Personals) (res model.Personals, errs errors.IError) {
+	userID := ctx.Input.GetData(constant.ContextUserID).(int64)
+
+	personalPayload := model.Personals{ID: userID}
+	personalList, err := impl.User.SelectPersonal(ctx, personalPayload, 0, 0)
+	if err != nil || len(personalList) == 0 {
+		logs.Error("failed get personal list data :", err)
+		return res, errors.New(constant.ErrorDataNotFoundDB)
+	}
+
+	res = personalList[0]
+	return
+}
+
 func (impl *UserUsecase) CheckAdmin(ctx *context.Context, req model.Personals) (res bool, errs errors.IError) {
 	if req.UserTypeId == constant.PersonalTypeAdminID {
+		res = true
+	}
+	return
+}
+
+func (impl *UserUsecase) CheckLecturer(ctx *context.Context, req model.Personals) (res bool, errs errors.IError) {
+	if req.UserTypeId == constant.PersonalTypeLecturerID {
 		res = true
 	}
 	return

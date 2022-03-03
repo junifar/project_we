@@ -44,3 +44,11 @@ func (impl *Deliveries) MustAdmin(ctx *context.Context) {
 		return
 	}
 }
+
+func (impl *Deliveries) MustLecturer(ctx *context.Context) {
+	errs := impl.CheckLecturer(ctx)
+	if errs != nil {
+		rsp.WriteResponseFilter(ctx, errs, nil)
+		return
+	}
+}

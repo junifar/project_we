@@ -28,6 +28,24 @@ func (impl *Deliveries) PersonalCreate() {
 	rsp.WriteResponse(&impl.Controller, nil, nil)
 }
 
+func (impl *Deliveries) CurrentUser() {
+	ctx := impl.Ctx
+	var req model.Personals
+
+	errs := bindPersonal(ctx, &req)
+	if errs != nil {
+		rsp.WriteResponse(&impl.Controller, errs, nil)
+	}
+
+	res, errs := impl.User.CurrentUser(ctx, req)
+	if errs != nil {
+		rsp.WriteResponse(&impl.Controller, errs, nil)
+		return
+	}
+
+	rsp.WriteResponse(&impl.Controller, nil, res)
+}
+
 func (impl *Deliveries) PersonalList() {
 	ctx := impl.Ctx
 	var req model.PersonalsPayload
