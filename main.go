@@ -4,13 +4,12 @@ import (
 	"github.com/beego/beego/v2/adapter/orm"
 	"github.com/beego/beego/v2/core/logs"
 	"github.com/beego/beego/v2/server/web"
+
+	"project_we/app/repository"
+	"project_we/app/usecase"
 	"project_we/delivery"
 	"project_we/function"
 	"project_we/route"
-
-	locationrpi "project_we/app/repository/location/impl"
-
-	locationuci "project_we/app/usecase/location/impl"
 )
 
 func init() {
@@ -22,23 +21,34 @@ func init() {
 }
 
 func main() {
-
 	orms := orm.NewOrm()
 
+	logs.Info("initialize cache")
+	cache, err := function.InitCache()
+	if err != nil {
+		return
+	}
+
 	logs.Info("initialize repository")
-	locationRP := locationrpi.New(orms)
-	logs.Info("initialize repository location")
+	rpList := repository.Init(repository.Dependencies{
+		ORM:   orms,
+		Cache: cache,
+	})
 
 	logs.Info("initialize usecase")
-	locationUC := locationuci.New(locationRP)
-	logs.Info("initialize usecase location")
+	ucList := usecase.Init(usecase.Repository{
+		LocationRP: rpList.LocationRP,
+		UserRP:     rpList.UserRP,
+	})
 
 	// initialize delivery
-	delivery := delivery.New(locationUC)
+	deliveries := delivery.New(delivery.Usecase{
+		LocationUC: ucList.LocationUC,
+		UserUC:     ucList.UserUC,
+	})
 	logs.Info("initialize delivery")
 
-	route.Common(delivery)
-	route.Location(delivery)
+	route.Init(deliveries)
 
 	web.Run()
 }

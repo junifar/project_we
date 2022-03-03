@@ -18,3 +18,25 @@ func bindCity(ctx *context.Context, reqCity *model.Cities) errors.IError {
 
 	return nil
 }
+
+func bindPersonal(ctx *context.Context, req *model.Personals) (errs errors.IError) {
+	err := ctx.Input.Bind(&req.Username, "username")
+	if err != nil {
+		logs.Error("failed binding input", err)
+		return errors.New(constant.ErrorBindingParameter)
+	}
+
+	err = ctx.Input.Bind(&req.Name, "name")
+	if err != nil {
+		logs.Error("failed binding input", err)
+		return errors.New(constant.ErrorBindingParameter)
+	}
+
+	err = ctx.Input.Bind(&req.Password, "password")
+	if err != nil {
+		logs.Error("failed binding input", err)
+		return errors.New(constant.ErrorBindingParameter)
+	}
+
+	return nil
+}

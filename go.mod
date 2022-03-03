@@ -4,6 +4,7 @@ go 1.17
 
 require (
 	github.com/beego/beego/v2 v2.0.2
+	github.com/google/uuid v1.2.0
 	github.com/lib/pq v1.10.2
 )
 
@@ -11,6 +12,7 @@ require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.1.1 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/gomodule/redigo v2.0.0+incompatible // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
 	github.com/mitchellh/mapstructure v1.4.1 // indirect
