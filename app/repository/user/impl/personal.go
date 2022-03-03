@@ -20,11 +20,7 @@ func (impl *UserRepository) SelectPersonal(ctx *context.Context, req model.Perso
 		querySeter = querySeter.Filter("username", req.Username)
 	}
 
-	//if req.Password != "" {
-	//	querySeter = querySeter.Filter("password", req.Password)
-	//}
-
-	_, err = querySeter.Limit(limit).Offset(page * limit).All(&res)
+	_, err = querySeter.Limit(limit + 1).Offset(page * limit).All(&res)
 	if err != nil {
 		return res, err
 	}

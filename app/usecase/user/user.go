@@ -14,7 +14,7 @@ type IUser interface {
 }
 
 type IPersonel interface {
-	ListPersonel(ctx *context.Context, req model.PersonalsPayload) (res []model.Personals, errs errors.IError)
+	ListPersonel(ctx *context.Context, req model.PersonalsPayload) (res model.PersonalResults, errs errors.IError)
 	CreatePersonel(ctx *context.Context, req model.Personals) (errs errors.IError)
 	CheckAdmin(ctx *context.Context, req model.Personals) (res bool, errs errors.IError)
 }

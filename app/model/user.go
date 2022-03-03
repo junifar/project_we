@@ -18,10 +18,16 @@ type Personals struct {
 	UpdateTime time.Time `orm:"auto_now;type(datetime)"`
 }
 
+type PersonalResults struct {
+	Personals    []Personals `json:"list,omitempty"`
+	NextPage     int         `json:"next_page,omitempty"`
+	PreviousPage int         `json:"previous_page,omitempty""`
+}
+
 type PersonalsPayload struct {
-	Personals Personals `json:"data"`
-	Limit     int
-	Page      int
+	Personals Personals `json:"personals,omitempty"`
+	Limit     int       `json:"limit,omitempty"`
+	Page      int       `json:"page,omitempty"`
 }
 
 // UserTypes model

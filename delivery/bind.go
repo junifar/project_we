@@ -60,6 +60,12 @@ func bindPersonalList(ctx *context.Context, req *model.PersonalsPayload) (errs e
 		return errors.New(constant.ErrorBindingParameter)
 	}
 
+	err = ctx.Input.Bind(&req.Personals.Username, "username")
+	if err != nil {
+		logs.Error("failed binding input", err)
+		return errors.New(constant.ErrorBindingParameter)
+	}
+
 	err = ctx.Input.Bind(&req.Limit, "limit")
 	if err != nil {
 		logs.Error("failed binding input", err)
