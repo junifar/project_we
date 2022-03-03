@@ -62,3 +62,15 @@ func (impl *Deliveries) Login() {
 
 	rsp.WriteResponse(&impl.Controller, nil, nil)
 }
+
+func (impl *Deliveries) Logout() {
+	delivery.SetSecureCookie(&impl.Controller, constant.CookieSecret, delivery.Cookie{
+		Name:     constant.CookieName,
+		Value:    "",
+		MaxAge:   -1 * constant.CookieMaxAge,
+		Secure:   false,
+		HttpOnly: constant.CookieHttpOnly,
+		SameSite: constant.CookieSameSite,
+	})
+	rsp.WriteResponse(&impl.Controller, nil, nil)
+}

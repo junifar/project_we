@@ -22,4 +22,5 @@ func Personal(delivery *delivery.Deliveries) {
 
 func Authorization(delivery *delivery.Deliveries) {
 	web.Router("/v1/login", delivery, "post:Login")
+	web.Router("/v1/logout", delivery, "get:Logout")
 }
