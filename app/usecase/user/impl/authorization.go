@@ -12,7 +12,7 @@ import (
 func (impl *UserUsecase) Login(ctx *context.Context, req model.Personals, uuid string) (cookie string, errs errors.IError) {
 	logs.Info("get personal data by username")
 	payloadExistingPersonal := model.Personals{Username: req.Username}
-	existingPersonal, err := impl.User.SelectPersonal(ctx, payloadExistingPersonal)
+	existingPersonal, err := impl.User.SelectPersonal(ctx, payloadExistingPersonal, 0, 0)
 	if err != nil || len(existingPersonal) == 0 {
 		logs.Error("failed get personal data by username : %s with error : %+v", req.Username, err)
 		errs = errors.New(constant.ErrorUserDoesntExist)

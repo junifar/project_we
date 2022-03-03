@@ -5,7 +5,7 @@ import (
 	"project_we/app/model"
 )
 
-func (impl *UserRepository) SelectPersonal(ctx *context.Context, req model.Personals) (res []model.Personals, err error) {
+func (impl *UserRepository) SelectPersonal(ctx *context.Context, req model.Personals, limit, page int) (res []model.Personals, err error) {
 	querySeter := impl.orm.QueryTable("personals")
 
 	if req.ID != 0 {
@@ -24,7 +24,7 @@ func (impl *UserRepository) SelectPersonal(ctx *context.Context, req model.Perso
 	//	querySeter = querySeter.Filter("password", req.Password)
 	//}
 
-	_, err = querySeter.All(&res)
+	_, err = querySeter.Limit(limit).Offset(page * limit).All(&res)
 	if err != nil {
 		return res, err
 	}

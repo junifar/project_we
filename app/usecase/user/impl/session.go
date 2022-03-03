@@ -20,7 +20,7 @@ func (impl *UserUsecase) CheckSession(ctx *context.Context, cookie string) (res 
 
 	logs.Info("get user data by user id", sessionData.UserID)
 	personalPayloads := model.Personals{ID: sessionData.UserID}
-	personalList, err := impl.User.SelectPersonal(ctx, personalPayloads)
+	personalList, err := impl.User.SelectPersonal(ctx, personalPayloads, 0, 0)
 	if err != nil {
 		logs.Error("failed get user data :", err)
 		errs = errors.New(constant.ErrorDataNotFoundDB)

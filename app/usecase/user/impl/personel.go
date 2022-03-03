@@ -9,9 +9,13 @@ import (
 	"time"
 )
 
-func (impl *UserUsecase) ListPersonel(ctx *context.Context, req model.Personals) (res []model.Personals, errs errors.IError) {
+func (impl *UserUsecase) ListPersonel(ctx *context.Context, req model.PersonalsPayload) (res []model.Personals, errs errors.IError) {
 	logs.Info("get personal list data")
-	res, err := impl.User.SelectPersonal(ctx, req)
+	var limit, page int
+	if req.Limit == 0 {
+		limit = 10
+	}
+	res, err := impl.User.SelectPersonal(ctx, req.Personals, limit, page)
 	if err != nil {
 		logs.Error("failed get personal list data :", err)
 		return res, errors.New(constant.ErrorDataNotFoundDB)

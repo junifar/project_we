@@ -18,6 +18,12 @@ type Personals struct {
 	UpdateTime time.Time `orm:"auto_now;type(datetime)"`
 }
 
+type PersonalsPayload struct {
+	Personals Personals `json:"data"`
+	Limit     int
+	Page      int
+}
+
 // UserTypes model
 type UserTypes struct {
 	ID         int64 `orm:"auto;column(id)"`

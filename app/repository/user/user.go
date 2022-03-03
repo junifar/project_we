@@ -13,7 +13,7 @@ type IUser interface {
 
 // IPersonal is personal repository interface
 type IPersonal interface {
-	SelectPersonal(ctx *context.Context, req model.Personals) (res []model.Personals, err error)
+	SelectPersonal(ctx *context.Context, req model.Personals, limit, page int) (res []model.Personals, err error)
 	InsertPersonal(ctx *context.Context, req model.Personals) (id int64, err error)
 }
 

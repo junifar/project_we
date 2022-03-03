@@ -30,9 +30,9 @@ func (impl *Deliveries) PersonalCreate() {
 
 func (impl *Deliveries) PersonalList() {
 	ctx := impl.Ctx
-	var req model.Personals
+	var req model.PersonalsPayload
 
-	errs := bindPersonal(ctx, &req)
+	errs := bindPersonalList(ctx, &req)
 	if errs != nil {
 		rsp.WriteResponse(&impl.Controller, errs, nil)
 		return
