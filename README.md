@@ -3,6 +3,7 @@
 ## Pre-requisite
 1. Postgresql installed
 2. golang v 1.17.0++
+3. redis installed
 
 ## configuration
 - all configuration there is in file ```/conf/app.conf```
@@ -15,3 +16,6 @@
 - running go mod tidy to install all dependencies
 - run command ```go run main.go``` from command line
 - all table will be created default for first run
+
+## docker build
+soon
