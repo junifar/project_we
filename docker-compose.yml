@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - cache:/data
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=project_1
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+  sipp:
+    build: .
+    container_name: "sipp"
+    ports:
+      - "9003:9003"
+    depends_on:
+      - cache
+      - db
+    links:
+      - cache
+      - db
+volumes:
+  cache:
+    driver: local
