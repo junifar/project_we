@@ -9,6 +9,16 @@ import (
 	"time"
 )
 
+func (impl *UserUsecase) ListPersonel(ctx *context.Context, req model.Personals) (res []model.Personals, errs errors.IError) {
+	logs.Info("get personal list data")
+	res, err := impl.User.SelectPersonal(ctx, req)
+	if err != nil {
+		logs.Error("failed get personal list data :", err)
+		return res, errors.New(constant.ErrorDataNotFoundDB)
+	}
+	return
+}
+
 func (impl *UserUsecase) CreatePersonel(ctx *context.Context, req model.Personals) (errs errors.IError) {
 	// TODO validate user input
 	userID := int64(0)

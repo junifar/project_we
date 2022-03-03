@@ -29,7 +29,22 @@ func (impl *Deliveries) PersonalCreate() {
 }
 
 func (impl *Deliveries) PersonalList() {
-	rsp.WriteResponse(&impl.Controller, nil, "test")
+	ctx := impl.Ctx
+	var req model.Personals
+
+	errs := bindPersonal(ctx, &req)
+	if errs != nil {
+		rsp.WriteResponse(&impl.Controller, errs, nil)
+		return
+	}
+
+	res, errs := impl.User.ListPersonel(ctx, req)
+	if errs != nil {
+		rsp.WriteResponse(&impl.Controller, errs, nil)
+		return
+	}
+
+	rsp.WriteResponse(&impl.Controller, nil, res)
 }
 
 // Login handler
