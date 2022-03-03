@@ -6,13 +6,18 @@ import (
 )
 
 func User(delivery *delivery.Deliveries) {
+	AccessUser(delivery)
 	Personal(delivery)
 	Authorization(delivery)
 }
 
+func AccessUser(delivery *delivery.Deliveries) {
+	web.InsertFilter("/internal/v1/users", web.BeforeRouter, delivery.MustAdmin)
+}
+
 func Personal(delivery *delivery.Deliveries) {
-	//web.Router("/internal/v1/personal", delivery, "get:User")
-	web.Router("/internal/v1/personal/create", delivery, "post:PersonalCreate")
+	web.Router("/internal/v1/users", delivery, "get:PersonalList")
+	web.Router("/internal/v1/users/create", delivery, "post:PersonalCreate")
 }
 
 func Authorization(delivery *delivery.Deliveries) {

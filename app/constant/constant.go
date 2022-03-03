@@ -1,10 +1,5 @@
 package constant
 
-// context
-const (
-	ContextUserID = "UserID"
-)
-
 // cookie
 const (
 	CookieName     = "x-Session"

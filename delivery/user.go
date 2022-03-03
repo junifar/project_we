@@ -28,6 +28,10 @@ func (impl *Deliveries) PersonalCreate() {
 	rsp.WriteResponse(&impl.Controller, nil, nil)
 }
 
+func (impl *Deliveries) PersonalList() {
+	rsp.WriteResponse(&impl.Controller, nil, "test")
+}
+
 // Login handler
 func (impl *Deliveries) Login() {
 	ctx := impl.Ctx
@@ -56,6 +60,5 @@ func (impl *Deliveries) Login() {
 		SameSite: constant.CookieSameSite,
 	})
 
-	rsp.WriteResponse(&impl.Controller, nil, cookie)
-
+	rsp.WriteResponse(&impl.Controller, nil, nil)
 }
