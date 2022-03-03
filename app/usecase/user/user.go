@@ -10,6 +10,7 @@ import (
 type IUser interface {
 	IPersonel
 	ISession
+	IAuthorization
 }
 
 type IPersonel interface {
@@ -19,4 +20,8 @@ type IPersonel interface {
 
 type ISession interface {
 	CheckSession(ctx *context.Context, cookie string) (res model.Personals, err errors.IError)
+}
+
+type IAuthorization interface {
+	Login(ctx *context.Context, req model.Personals, uuid string) (cookie string, errs errors.IError)
 }

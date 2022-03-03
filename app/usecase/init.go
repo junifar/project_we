@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"github.com/beego/beego/v2/adapter/cache"
 	"github.com/beego/beego/v2/core/logs"
 	useruc "project_we/app/usecase/user"
 
@@ -15,6 +16,7 @@ import (
 type Usecase struct {
 	LocationUC locationuc.ILocation
 	UserUC     useruc.IUser
+	Cache      cache.Cache
 }
 
 type Repository struct {

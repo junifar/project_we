@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"github.com/beego/beego/v2/adapter/cache"
 	"github.com/beego/beego/v2/adapter/orm"
 	"github.com/beego/beego/v2/core/logs"
 
@@ -11,7 +12,8 @@ import (
 )
 
 type Dependencies struct {
-	ORM orm.Ormer
+	ORM   orm.Ormer
+	Cache cache.Cache
 }
 
 type repositories struct {
@@ -22,7 +24,7 @@ type repositories struct {
 func Init(dependencies Dependencies) (res repositories) {
 	res.LocationRP = locationrpi.New(dependencies.ORM)
 	logs.Info("initialize repository location")
-	res.UserRP = userrpi.New(dependencies.ORM)
+	res.UserRP = userrpi.New(dependencies.ORM, dependencies.Cache)
 	logs.Info("initialize repository user")
 	return
 }

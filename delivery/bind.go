@@ -20,7 +20,7 @@ func bindCity(ctx *context.Context, reqCity *model.Cities) errors.IError {
 }
 
 func bindPersonal(ctx *context.Context, req *model.Personals) (errs errors.IError) {
-	err := ctx.Input.Bind(&req.Name, "usernsme")
+	err := ctx.Input.Bind(&req.Username, "username")
 	if err != nil {
 		logs.Error("failed binding input", err)
 		return errors.New(constant.ErrorBindingParameter)
@@ -32,7 +32,7 @@ func bindPersonal(ctx *context.Context, req *model.Personals) (errs errors.IErro
 		return errors.New(constant.ErrorBindingParameter)
 	}
 
-	err = ctx.Input.Bind(&req.Name, "password")
+	err = ctx.Input.Bind(&req.Password, "password")
 	if err != nil {
 		logs.Error("failed binding input", err)
 		return errors.New(constant.ErrorBindingParameter)

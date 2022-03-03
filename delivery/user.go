@@ -1,7 +1,10 @@
 package delivery
 
 import (
+	"github.com/google/uuid"
+	"project_we/app/constant"
 	"project_we/app/model"
+	delivery "project_we/app/pkg/cookie"
 	rsp "project_we/app/pkg/response"
 )
 
@@ -23,4 +26,36 @@ func (impl *Deliveries) PersonalCreate() {
 	}
 
 	rsp.WriteResponse(&impl.Controller, nil, nil)
+}
+
+// Login handler
+func (impl *Deliveries) Login() {
+	ctx := impl.Ctx
+	var req model.Personals
+
+	errs := bindPersonal(ctx, &req)
+	if errs != nil {
+		rsp.WriteResponse(&impl.Controller, errs, nil)
+		return
+	}
+
+	uniqueID := uuid.New().String()
+
+	cookie, errs := impl.User.Login(ctx, req, uniqueID)
+	if errs != nil {
+		rsp.WriteResponse(&impl.Controller, errs, nil)
+		return
+	}
+
+	delivery.SetSecureCookie(&impl.Controller, constant.CookieSecret, delivery.Cookie{
+		Name:     constant.CookieName,
+		Value:    cookie,
+		MaxAge:   constant.CookieMaxAge,
+		Secure:   false,
+		HttpOnly: constant.CookieHttpOnly,
+		SameSite: constant.CookieSameSite,
+	})
+
+	rsp.WriteResponse(&impl.Controller, nil, cookie)
+
 }

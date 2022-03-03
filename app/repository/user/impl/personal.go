@@ -17,12 +17,12 @@ func (impl *UserRepository) SelectPersonal(ctx *context.Context, req model.Perso
 	}
 
 	if req.Username != "" {
-		querySeter = querySeter.Filter("email", req.Username)
+		querySeter = querySeter.Filter("username", req.Username)
 	}
 
-	if req.Password != "" {
-		querySeter = querySeter.Filter("password", req.Password)
-	}
+	//if req.Password != "" {
+	//	querySeter = querySeter.Filter("password", req.Password)
+	//}
 
 	_, err = querySeter.All(&res)
 	if err != nil {

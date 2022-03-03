@@ -23,8 +23,17 @@ func init() {
 func main() {
 	orms := orm.NewOrm()
 
+	logs.Info("initialize cache")
+	cache, err := function.InitCache()
+	if err != nil {
+		return
+	}
+
 	logs.Info("initialize repository")
-	rpList := repository.Init(repository.Dependencies{ORM: orms})
+	rpList := repository.Init(repository.Dependencies{
+		ORM:   orms,
+		Cache: cache,
+	})
 
 	logs.Info("initialize usecase")
 	ucList := usecase.Init(usecase.Repository{
