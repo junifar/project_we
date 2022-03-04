@@ -18,6 +18,6 @@ FROM busybox:1.35.0
 COPY --from=builder /app/main .
 COPY --from=builder /app/conf /conf
 
-EXPOSE 9003 5432
+EXPOSE 9003 6379
 
 CMD [ "./main" ]
