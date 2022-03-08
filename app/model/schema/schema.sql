@@ -64,7 +64,7 @@ CREATE SEQUENCE pengguna.peran_seq;
 CREATE TABLE pengguna."peran"
 (
     "id_peran"          bigint    DEFAULT nextval('pengguna.peran_seq') NOT NULL,
-    "kd_applikasi"      int                                             NOT NULL,
+    "kd_aplikasi"      int                                             NOT NULL,
     "nama_peran"        character varying(50)                           NOT NULL,
     "keterangan"        character varying(255),
     "kd_kelompok_peran" character varying(2)                            NOT NULL,

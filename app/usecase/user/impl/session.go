@@ -18,8 +18,8 @@ func (impl *UserUsecase) CheckSession(ctx *context.Context, cookie string) (res 
 		return
 	}
 
-	logs.Info("get user data by user id", sessionData.UserID)
-	personalPayloads := model.Personals{ID: sessionData.UserID}
+	logs.Info("get user data by user id", sessionData.IDPersonal)
+	personalPayloads := model.Personals{ID: sessionData.IDPersonal}
 	personalList, err := impl.User.SelectPersonal(ctx, personalPayloads, 0, 0)
 	if err != nil {
 		logs.Error("failed get user data :", err)

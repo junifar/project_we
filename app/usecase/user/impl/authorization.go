@@ -19,7 +19,6 @@ func (impl *UserUsecase) Login(ctx *context.Context, req model.Personals, uuid s
 	}
 
 	userData := identitasPengguna[0]
-
 	//validate password
 	if userData.Pswd != req.Password {
 		logs.Error("password is incorrect")
@@ -27,11 +26,23 @@ func (impl *UserUsecase) Login(ctx *context.Context, req model.Personals, uuid s
 		return
 	}
 
+	logs.Info("get list peran by id_personal : ", userData.IdPersonal)
+	listPeran, err := impl.User.SelectPeranByIDPersonal(ctx, userData.IdPersonal)
+	if err != nil || len(listPeran) == 0 {
+		logs.Error("failed get peran  data by personal ID : %s with error : %+v", userData.IdPersonal, err)
+		errs = errors.New(constant.ErrorPeranDoesntExist)
+		return
+	}
+
+	peranUser := make([]string, 0, len(listPeran))
+	for _, peran := range listPeran {
+		peranUser = append(peranUser, peran.KdKelompokPeran)
+	}
+
 	//save to session
 	payloadSession := model.Sessions{
-		UserID:   userData.IdPersonal,
-		Name:     userData.NamaUser,
-		Username: userData.NamaUser,
+		IDPersonal: userData.IdPersonal,
+		IDPeran:    peranUser,
 	}
 
 	logs.Info("set session to cache for user id", userData.IdPersonal)

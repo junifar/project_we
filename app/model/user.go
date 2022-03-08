@@ -16,6 +16,16 @@ type IdentitasPengguna struct {
 	TglCreated    time.Time `orm:"column(tgl_created)"`
 }
 
+type Peran struct {
+	IdPeran         int64
+	KdApplikasi     string
+	NamaPeran       string
+	Keterangan      string
+	KdKelompokPeran string
+	TglCreated      time.Time
+	TglUpdated      time.Time
+}
+
 // Personals model
 type Personals struct {
 	ID         int64 `orm:"auto;column(id)"`

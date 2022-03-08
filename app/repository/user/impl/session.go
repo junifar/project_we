@@ -14,7 +14,7 @@ import (
 
 // SetSession is function to set session into cache
 func (impl *UserRepository) SetSession(ctx *context.Context, req model.Sessions, uuid string) (string, error) {
-	userIDString := strconv.FormatInt(req.UserID, 10)
+	userIDString := strconv.FormatInt(req.IDPersonal, 10)
 	userToken := hex.EncodeToString([]byte(userIDString))
 	cookie := uuid + "-" + userToken
 
