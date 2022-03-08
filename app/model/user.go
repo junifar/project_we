@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+type IdentitasPengguna struct {
+	ID            int64
+	IdPersonal    string
+	NamaUser      string
+	Pswd          string
+	TglData       time.Time
+	KdStsPengguna string
+	IdInstitusi   int64
+	TglUpdated    time.Time
+	TglCreated    time.Time
+}
+
 // Personals model
 type Personals struct {
 	ID         int64 `orm:"auto;column(id)"`
