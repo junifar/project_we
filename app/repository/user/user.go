@@ -17,6 +17,11 @@ type IPersonal interface {
 	InsertPersonal(ctx *context.Context, req model.Personals) (id int64, err error)
 }
 
+type IdentitasPengguna interface {
+	SelectIdentitasPengguna(ctx *context.Context, req model.IdentitasPengguna, limit, page int) (res []model.IdentitasPengguna, err error)
+	InsertIdentitasPengguna(ctx *context.Context, req model.Personals) (id int64, err error)
+}
+
 // ISession is session repository interface
 type ISession interface {
 	SetSession(ctx *context.Context, req model.Sessions, uuid string) (string, error)
