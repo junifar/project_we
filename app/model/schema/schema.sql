@@ -14,7 +14,8 @@ CREATE TABLE "pengguna"."identitas_pengguna"
     "kd_sts_pengguna"  character varying(1)                                         NOT NULL,
     "id_institusi"     bigint                                                       NOT NULL,
     "tgl_updated"      timestamp DEFAULT current_timestamp                          NOT NULL,
-    "tgl_created"      timestamp DEFAULT current_timestamp                          NOT NULL
+    "tgl_created"      timestamp DEFAULT current_timestamp                          NOT NULL,
+    CONSTRAINT "identitas_pengguna_pkey" PRIMARY KEY (id_personal)
 );
 CREATE INDEX identitas_pengguna_id_personal_idx ON pengguna.identitas_pengguna (id_personal);
 
@@ -40,21 +41,11 @@ CREATE TABLE tkt."institusi"
     "id_institusi_induk" bigint,
     "token_verifikasi"   varchar(32),
     "tgl_updated"        timestamp DEFAULT current_timestamp            NOT NULL,
-    "tgl_created"        timestamp DEFAULT current_timestamp            NOT NULL
+    "tgl_created"        timestamp DEFAULT current_timestamp            NOT NULL,
+    CONSTRAINT "institusi_pkey" PRIMARY KEY (id_institusi)
 );
 CREATE INDEX institusi_id_institusi_idx ON tkt.institusi (id_institusi);
 
-DROP TABLE IF EXISTS pengguna."status_pengguna";
-DROP SEQUENCE IF EXISTS pengguna.status_pengguna_seq;
-CREATE SEQUENCE pengguna.status_pengguna_seq;
-CREATE TABLE pengguna."status_pengguna"
-(
-    "kd_sts_pengguna" bigint    DEFAULT nextval('pengguna.status_pengguna_seq') NOT NULL,
-    "status_pengguna" character varying(10)                                     NOT NULL,
-    "tgl_updated"     timestamp DEFAULT current_timestamp                       NOT NULL,
-    "tgl_created"     timestamp DEFAULT current_timestamp                       NOT NULL
-);
-CREATE INDEX pengguna_kd_status_pengguna_idx ON pengguna.status_pengguna (kd_sts_pengguna);
 
 DROP TABLE IF EXISTS pengguna."status_pengguna";
 DROP SEQUENCE IF EXISTS pengguna.status_pengguna_seq;
@@ -64,7 +55,8 @@ CREATE TABLE pengguna."status_pengguna"
     "kd_sts_pengguna" bigint    DEFAULT nextval('pengguna.status_pengguna_seq') NOT NULL,
     "status_pengguna" character varying(10)                                     NOT NULL,
     "tgl_updated"     timestamp DEFAULT current_timestamp                       NOT NULL,
-    "tgl_created"     timestamp DEFAULT current_timestamp                       NOT NULL
+    "tgl_created"     timestamp DEFAULT current_timestamp                       NOT NULL,
+    CONSTRAINT "status_pengguna_pkey" PRIMARY KEY (kd_sts_pengguna)
 );
 CREATE INDEX pengguna_kd_status_pengguna_idx ON pengguna.status_pengguna (kd_sts_pengguna);
 
@@ -79,7 +71,26 @@ CREATE TABLE pengguna."peran"
     "keterangan"        character varying(255),
     "kd_kelompok_prean" int                                             NOT NULL,
     "tgl_updated"       timestamp DEFAULT current_timestamp             NOT NULL,
-    "tgl_created"       timestamp DEFAULT current_timestamp             NOT NULL
+    "tgl_created"       timestamp DEFAULT current_timestamp             NOT NULL,
+    CONSTRAINT "peran_pkey" PRIMARY KEY (id_peran)
 );
 CREATE INDEX peran_id_peran_idx ON pengguna.peran (id_peran);
+
+DROP TABLE IF EXISTS pengguna."peran_pengguna";
+DROP SEQUENCE IF EXISTS pengguna.peran_pengguna_seq;
+CREATE SEQUENCE pengguna.peran_pengguna_seq;
+CREATE TABLE pengguna."peran_pengguna"
+(
+    "id_personal"           bigint                              NOT NULL,
+    "id_peran"              bigint                              NOT NULL,
+    "kd_sts_peran_pengguna" character varying(1)                not null,
+    "is_default"            int       DEFAULT 0,
+    "is_peran_digunakan"    int       DEFAULT 0,
+    "tgl_updated"           timestamp DEFAULT current_timestamp NOT NULL,
+    "tgl_created"           timestamp DEFAULT current_timestamp NOT NULL,
+    CONSTRAINT "peran_pengguna_pkey" PRIMARY KEY (id_personal, id_peran)
+);
+CREATE INDEX peran_pengguna_id_peran_id_personal_idx ON pengguna.peran_pengguna (id_personal, id_peran);
+
+
 
