@@ -92,5 +92,17 @@ CREATE TABLE pengguna."peran_pengguna"
 );
 CREATE INDEX peran_pengguna_id_peran_id_personal_idx ON pengguna.peran_pengguna (id_personal, id_peran);
 
+DROP TABLE IF EXISTS tkt."jenis_institusi";
+DROP SEQUENCE IF EXISTS tkt.jenis_institusi_seq;
+CREATE SEQUENCE tkt.jenis_institusi_seq;
+CREATE TABLE tkt."jenis_institusi"
+(
+    "kd_jenis_institusi" bigint    DEFAULT nextval('tkt.jenis_institusi_seq') NOT NULL,
+    "jenis_institusi"    character varying(100)                               NOT NULL,
+    "tgl_updated"        timestamp DEFAULT current_timestamp                  NOT NULL,
+    "tgl_created"        timestamp DEFAULT current_timestamp                  NOT NULL,
+    CONSTRAINT "jenis_institusi_pkey" PRIMARY KEY (kd_jenis_institusi)
+);
+CREATE INDEX jenis_insatitusi_kd_jenis_institusi_idx ON tkt.jenis_institusi (kd_jenis_institusi);
 
 
