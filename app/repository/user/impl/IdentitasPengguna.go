@@ -1,24 +1,30 @@
 package impl
 
 import (
-	"github.com/beego/beego/v2/adapter/context"
+	"github.com/beego/beego/v2/server/web/context"
 	"project_we/app/model"
 )
 
-func (impl *UserRepository) SelectIdentitasPengguna(ctx *context.Context, req model.IdentitasPengguna, limit, page int) (res []model.IdentitasPengguna, err error) {
-	querySetter := impl.orm.QueryTable("pengguna.identitas_pengguna")
+const (
+	BaseQueryGetIdentitasPengguna = `
+										select 
+											id_personal, 
+											nama_user, 
+											pswd, 
+											tgl_data, 
+											kd_sts_pengguna, 
+											id_institusi, 
+											tgl_updated, 
+											tgl_created
+										from pengguna.identitas_pengguna
+									`
+)
 
-	if req.IdPersonal != 0 {
-		querySetter = querySetter.Filter("id_personal", req.IdPersonal)
-	}
-
-	if req.NamaUser != "" {
-		querySetter = querySetter.Filter("nama_user", req.NamaUser)
-	}
-
-	_, err = querySetter.All(&res)
-	if err != nil {
-		return nil, err
+func (impl *UserRepository) SelectIdentitasPenggunaByUserName(ctx *context.Context, username string) (res []model.IdentitasPengguna, err error) {
+	query := BaseQueryGetIdentitasPengguna + ` WHERE nama_user = ? `
+	_, err = impl.orm.Raw(query, username).QueryRows(&res)
+	if err == nil {
+		return
 	}
 	return
 }

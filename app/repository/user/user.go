@@ -9,6 +9,7 @@ import (
 type IUser interface {
 	IPersonal
 	ISession
+	IdentitasPengguna
 }
 
 // IPersonal is personal repository interface
@@ -18,7 +19,7 @@ type IPersonal interface {
 }
 
 type IdentitasPengguna interface {
-	SelectIdentitasPengguna(ctx *context.Context, req model.IdentitasPengguna, limit, page int) (res []model.IdentitasPengguna, err error)
+	SelectIdentitasPenggunaByUserName(ctx *context.Context, username string) (res []model.IdentitasPengguna, err error)
 	InsertIdentitasPengguna(ctx *context.Context, req model.Personals) (id int64, err error)
 }
 
