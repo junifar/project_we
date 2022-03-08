@@ -50,10 +50,10 @@ CREATE INDEX institusi_id_institusi_idx ON tkt.institusi (id_institusi);
 DROP TABLE IF EXISTS pengguna."status_pengguna";
 CREATE TABLE pengguna."status_pengguna"
 (
-    "kd_sts_pengguna" bigint     NOT NULL,
-    "status_pengguna" character varying(10)                                     NOT NULL,
-    "tgl_updated"     timestamp DEFAULT current_timestamp                       NOT NULL,
-    "tgl_created"     timestamp DEFAULT current_timestamp                       NOT NULL,
+    "kd_sts_pengguna" bigint                              NOT NULL,
+    "status_pengguna" character varying(10)               NOT NULL,
+    "tgl_updated"     timestamp DEFAULT current_timestamp NOT NULL,
+    "tgl_created"     timestamp DEFAULT current_timestamp NOT NULL,
     CONSTRAINT "status_pengguna_pkey" PRIMARY KEY (kd_sts_pengguna)
 );
 CREATE INDEX pengguna_kd_status_pengguna_idx ON pengguna.status_pengguna (kd_sts_pengguna);
@@ -67,7 +67,7 @@ CREATE TABLE pengguna."peran"
     "kd_applikasi"      int                                             NOT NULL,
     "nama_peran"        character varying(50)                           NOT NULL,
     "keterangan"        character varying(255),
-    "kd_kelompok_prean" int                                             NOT NULL,
+    "kd_kelompok_peran" character varying(2)                            NOT NULL,
     "tgl_updated"       timestamp DEFAULT current_timestamp             NOT NULL,
     "tgl_created"       timestamp DEFAULT current_timestamp             NOT NULL,
     CONSTRAINT "peran_pkey" PRIMARY KEY (id_peran)
