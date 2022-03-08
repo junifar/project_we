@@ -56,3 +56,30 @@ CREATE TABLE pengguna."status_pengguna"
 );
 CREATE INDEX pengguna_kd_status_pengguna_idx ON pengguna.status_pengguna (kd_sts_pengguna);
 
+DROP TABLE IF EXISTS pengguna."status_pengguna";
+DROP SEQUENCE IF EXISTS pengguna.status_pengguna_seq;
+CREATE SEQUENCE pengguna.status_pengguna_seq;
+CREATE TABLE pengguna."status_pengguna"
+(
+    "kd_sts_pengguna" bigint    DEFAULT nextval('pengguna.status_pengguna_seq') NOT NULL,
+    "status_pengguna" character varying(10)                                     NOT NULL,
+    "tgl_updated"     timestamp DEFAULT current_timestamp                       NOT NULL,
+    "tgl_created"     timestamp DEFAULT current_timestamp                       NOT NULL
+);
+CREATE INDEX pengguna_kd_status_pengguna_idx ON pengguna.status_pengguna (kd_sts_pengguna);
+
+DROP TABLE IF EXISTS pengguna."peran";
+DROP SEQUENCE IF EXISTS pengguna.peran_seq;
+CREATE SEQUENCE pengguna.peran_seq;
+CREATE TABLE pengguna."peran"
+(
+    "id_peran"          bigint    DEFAULT nextval('pengguna.peran_seq') NOT NULL,
+    "kd_applikasi"      int                                             NOT NULL,
+    "nama_peran"        character varying(50)                           NOT NULL,
+    "keterangan"        character varying(255),
+    "kd_kelompok_prean" int                                             NOT NULL,
+    "tgl_updated"       timestamp DEFAULT current_timestamp             NOT NULL,
+    "tgl_created"       timestamp DEFAULT current_timestamp             NOT NULL
+);
+CREATE INDEX peran_id_peran_idx ON pengguna.peran (id_peran);
+
