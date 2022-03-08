@@ -1,4 +1,3 @@
-
--- seeding personals table
-INSERT INTO public.personals (name, username, password, user_type_id, create_by, create_time, update_by, update_time) VALUES ('admin', 'admin', 'admin', 1, 0, now(), 0, now());
-INSERT INTO public.personals (name, username, password, user_type_id, create_by, create_time, update_by, update_time) VALUES ('dosen', 'dosen', 'dosen', 2, 0, now(), 0, now());
+--status pengguna
+INSERT INTO pengguna.status_pengguna (kd_sts_pengguna, status_pengguna, tgl_updated, tgl_created) VALUES (0, 'Off', now(), now());
+INSERT INTO pengguna.status_pengguna (kd_sts_pengguna, status_pengguna, tgl_updated, tgl_created) VALUES (1, 'On', now(), now());
