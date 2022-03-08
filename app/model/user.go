@@ -6,15 +6,14 @@ import (
 )
 
 type IdentitasPengguna struct {
-	ID            int64
-	IdPersonal    string
-	NamaUser      string
-	Pswd          string
-	TglData       time.Time
-	KdStsPengguna string
-	IdInstitusi   int64
-	TglUpdated    time.Time
-	TglCreated    time.Time
+	IdPersonal    string    `orm:"column(id_personal)"`
+	NamaUser      string    `orm:"column(nama_user)"`
+	Pswd          string    `orm:"column(pswd)"`
+	TglData       time.Time `orm:"column(tgl_data)"`
+	KdStsPengguna string    `orm:"column(kd_sts_pengguna)"`
+	IdInstitusi   int64     `orm:"column(id_institusi)"`
+	TglUpdated    time.Time `orm:"column(tgl_updated)"`
+	TglCreated    time.Time `orm:"column(tgl_created)"`
 }
 
 // Personals model

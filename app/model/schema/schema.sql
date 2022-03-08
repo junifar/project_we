@@ -1,12 +1,12 @@
 CREATE SCHEMA "pengguna";
 
-DROP TABLE IF EXISTS "identitas_pengguna";
-DROP SEQUENCE IF EXISTS identitas_pengguna_seq;
-CREATE SEQUENCE identitas_pengguna_seq;
+DROP TABLE IF EXISTS pengguna."identitas_pengguna";
+DROP SEQUENCE IF EXISTS pengguna.identitas_pengguna_seq;
+CREATE SEQUENCE pengguna.identitas_pengguna_seq;
 CREATE TABLE "pengguna"."identitas_pengguna"
 (
     "id_personal"      bigint    DEFAULT nextval('identitas_pengguna_seq') NOT NULL,
-    "id_personal_uuid" bigint                                              NOT NULL,
+    "id_personal_uuid" bigint,
     "nama_user"        character varying(25)                               NOT NULL,
     "pswd"             character varying(20)                               NOT NULL,
     "tgl_data"         date      default now()                             NOT NULL,
