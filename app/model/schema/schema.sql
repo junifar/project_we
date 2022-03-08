@@ -48,11 +48,9 @@ CREATE INDEX institusi_id_institusi_idx ON tkt.institusi (id_institusi);
 
 
 DROP TABLE IF EXISTS pengguna."status_pengguna";
-DROP SEQUENCE IF EXISTS pengguna.status_pengguna_seq;
-CREATE SEQUENCE pengguna.status_pengguna_seq;
 CREATE TABLE pengguna."status_pengguna"
 (
-    "kd_sts_pengguna" bigint    DEFAULT nextval('pengguna.status_pengguna_seq') NOT NULL,
+    "kd_sts_pengguna" bigint     NOT NULL,
     "status_pengguna" character varying(10)                                     NOT NULL,
     "tgl_updated"     timestamp DEFAULT current_timestamp                       NOT NULL,
     "tgl_created"     timestamp DEFAULT current_timestamp                       NOT NULL,
