@@ -6,7 +6,7 @@ import (
 )
 
 type IdentitasPengguna struct {
-	IdPersonal    string    `orm:"column(id_personal)"`
+	IdPersonal    int64     `orm:"column(id_personal)"`
 	NamaUser      string    `orm:"column(nama_user)"`
 	Pswd          string    `orm:"column(pswd)"`
 	TglData       time.Time `orm:"column(tgl_data)"`
