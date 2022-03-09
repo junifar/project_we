@@ -64,7 +64,7 @@ CREATE SEQUENCE pengguna.peran_seq;
 CREATE TABLE pengguna."peran"
 (
     "id_peran"          bigint    DEFAULT nextval('pengguna.peran_seq') NOT NULL,
-    "kd_aplikasi"      int                                             NOT NULL,
+    "kd_aplikasi"       int                                             NOT NULL,
     "nama_peran"        character varying(50)                           NOT NULL,
     "keterangan"        character varying(255),
     "kd_kelompok_peran" character varying(2)                            NOT NULL,
@@ -102,5 +102,26 @@ CREATE TABLE tkt."jenis_institusi"
     CONSTRAINT "jenis_institusi_pkey" PRIMARY KEY (kd_jenis_institusi)
 );
 CREATE INDEX jenis_insatitusi_kd_jenis_institusi_idx ON tkt.jenis_institusi (kd_jenis_institusi);
+
+DROP TABLE IF EXISTS pengguna."personal";
+DROP SEQUENCE IF EXISTS pengguna.personal_seq;
+CREATE SEQUENCE pengguna.personal_seq;
+CREATE TABLE "pengguna"."personal"
+(
+    "id_personal"      bigint    DEFAULT nextval('pengguna.personal_seq') NOT NULL,
+    "id_personal_uuid" bigint,
+    "nomor_ktp"        character varying(25),
+    "alamat"           character varying(200),
+    "tempat_lahir"     character varying(100),
+    "tanggal_lahir"    date,
+    "nomor_telepon"    character varying(20),
+    "nomor_hp"         character varying(20),
+    "surel"            character varying(200),
+    "website_personal" character varying(100),
+    "tgl_updated"      timestamp DEFAULT current_timestamp                NOT NULL,
+    "tgl_created"      timestamp DEFAULT current_timestamp                NOT NULL,
+    CONSTRAINT "personal_pkey" PRIMARY KEY (id_personal)
+);
+CREATE INDEX personal_id_personal_idx ON pengguna.personal (id_personal);
 
 
