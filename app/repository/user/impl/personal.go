@@ -5,6 +5,25 @@ import (
 	"project_we/app/model"
 )
 
+const (
+	BaseQueryGetPersonal = `
+								select 
+									   id_personal,
+									   id_personal_uuid,
+									   nomor_ktp,
+									   alamat,
+									   tempat_lahir,
+									   tanggal_lahir,
+									   nomor_telepon,
+									   nomor_hp,
+									   surel,
+									   website_personal,
+									   tgl_updated,
+									   tgl_created
+								from pengguna.personal
+							`
+)
+
 func (impl *UserRepository) SelectPersonal(ctx *context.Context, req model.Personals, limit, page int) (res []model.Personals, err error) {
 	querySeter := impl.orm.QueryTable("personals")
 
@@ -45,4 +64,14 @@ func (impl *UserRepository) InsertPersonal(ctx *context.Context, req model.Perso
 	}
 
 	return id, nil
+}
+
+func (impl *UserRepository) SelectPersonalByIDPersonal(ctx *context.Context, idPersonal int64) (res model.Personal, err error) {
+	query := BaseQueryGetPersonal + ` WHERE id_personal = ?`
+
+	err = impl.orm.Raw(query, idPersonal).QueryRow(&res)
+	if err == nil {
+		return
+	}
+	return
 }

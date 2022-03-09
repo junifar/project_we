@@ -15,7 +15,7 @@ type IUser interface {
 
 type IPersonel interface {
 	ListPersonel(ctx *context.Context, req model.PersonalsPayload) (res model.PersonalResults, errs errors.IError)
-	CurrentUser(ctx *context.Context, req model.Personals) (res model.Personals, errs errors.IError)
+	CurrentUser(ctx *context.Context) (res model.Personal, errs errors.IError)
 	CreatePersonel(ctx *context.Context, req model.Personals) (errs errors.IError)
 	CheckAdmin(ctx *context.Context, req model.Sessions) (res bool, errs errors.IError)
 	CheckLecturer(ctx *context.Context, req model.Sessions) (res bool, errs errors.IError)

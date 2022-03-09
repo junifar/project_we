@@ -26,6 +26,20 @@ type Peran struct {
 	TglUpdated      time.Time
 }
 
+type Personal struct {
+	IdPersonal      int64
+	NomorKtp        string
+	Alamat          string
+	TempatLahir     string
+	TanggalLahir    time.Time
+	NomorTelepon    string
+	NomorHp         string
+	Surel           string
+	WebsitePersonal string
+	TglCreated      time.Time
+	TglUpdated      time.Time
+}
+
 // Personals model
 type Personals struct {
 	ID         int64 `orm:"auto;column(id)"`

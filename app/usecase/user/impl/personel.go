@@ -58,17 +58,15 @@ func (impl *UserUsecase) CreatePersonel(ctx *context.Context, req model.Personal
 	return nil
 }
 
-func (impl *UserUsecase) CurrentUser(ctx *context.Context, req model.Personals) (res model.Personals, errs errors.IError) {
+func (impl *UserUsecase) CurrentUser(ctx *context.Context) (res model.Personal, errs errors.IError) {
 	userID := ctx.Input.GetData(constant.ContextUserID).(int64)
 
-	personalPayload := model.Personals{ID: userID}
-	personalList, err := impl.User.SelectPersonal(ctx, personalPayload, 0, 0)
-	if err != nil || len(personalList) == 0 {
+	res, err := impl.User.SelectPersonalByIDPersonal(ctx, userID)
+	if err != nil {
 		logs.Error("failed get personal list data :", err)
 		return res, errors.New(constant.ErrorDataNotFoundDB)
 	}
 
-	res = personalList[0]
 	return
 }
 
