@@ -19,6 +19,7 @@ type IPersonal interface {
 	InsertPersonal(ctx *context.Context, req model.Personals) (id int64, err error)
 
 	SelectPersonalByIDPersonal(ctx *context.Context, idPersonal int64) (res model.Personal, err error)
+	SelectPersonalByFilter(ctx *context.Context, filter model.PersonalFilter, limit, page int) (res []model.Personal, err error)
 }
 
 type IdentitasPengguna interface {

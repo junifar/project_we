@@ -41,15 +41,7 @@ func (impl *Deliveries) CurrentUser() {
 
 func (impl *Deliveries) PersonalList() {
 	ctx := impl.Ctx
-	var req model.PersonalsPayload
-
-	errs := bindPersonalList(ctx, &req)
-	if errs != nil {
-		rsp.WriteResponse(&impl.Controller, errs, nil)
-		return
-	}
-
-	res, errs := impl.User.ListPersonel(ctx, req)
+	res, errs := impl.User.ListPersonel(ctx)
 	if errs != nil {
 		rsp.WriteResponse(&impl.Controller, errs, nil)
 		return

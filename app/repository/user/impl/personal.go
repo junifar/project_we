@@ -75,3 +75,11 @@ func (impl *UserRepository) SelectPersonalByIDPersonal(ctx *context.Context, idP
 	}
 	return
 }
+
+func (impl *UserRepository) SelectPersonalByFilter(ctx *context.Context, filter model.PersonalFilter, limit, page int) (res []model.Personal, err error) {
+	_, err = impl.orm.Raw(BaseQueryGetPersonal).QueryRows(&res)
+	if err == nil {
+		return
+	}
+	return
+}

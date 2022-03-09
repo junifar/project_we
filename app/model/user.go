@@ -40,6 +40,11 @@ type Personal struct {
 	TglUpdated      time.Time
 }
 
+type PersonalFilter struct {
+	IdPersonal int64
+	NomorKtp   string
+}
+
 // Personals model
 type Personals struct {
 	ID         int64 `orm:"auto;column(id)"`

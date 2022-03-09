@@ -9,31 +9,12 @@ import (
 	"time"
 )
 
-func (impl *UserUsecase) ListPersonel(ctx *context.Context, req model.PersonalsPayload) (res model.PersonalResults, errs errors.IError) {
+func (impl *UserUsecase) ListPersonel(ctx *context.Context) (res []model.Personal, errs errors.IError) {
 	logs.Info("get personal list data")
-	var limit, page int
-	if req.Limit < 10 {
-		limit = 10
-	}
-	page = req.Page - 1
-
-	resData, err := impl.User.SelectPersonal(ctx, req.Personals, limit, page)
-	if err != nil {
+	res, err := impl.User.SelectPersonalByFilter(ctx, model.PersonalFilter{}, 0, 0)
+	if err != nil || len(res) == 0 {
 		logs.Error("failed get personal list data :", err)
 		return res, errors.New(constant.ErrorDataNotFoundDB)
-	}
-
-	if len(resData) > limit {
-		res.NextPage = req.Page + 1
-		if req.Page-1 >= 0 {
-			res.PreviousPage = req.Page - 1
-		}
-		res.Personals = resData[:len(resData)-1]
-	} else {
-		if req.Page-1 >= 0 {
-			res.PreviousPage = req.Page - 1
-		}
-		res.Personals = resData
 	}
 	return
 }
