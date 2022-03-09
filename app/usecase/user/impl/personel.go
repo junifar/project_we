@@ -72,16 +72,22 @@ func (impl *UserUsecase) CurrentUser(ctx *context.Context, req model.Personals) 
 	return
 }
 
-func (impl *UserUsecase) CheckAdmin(ctx *context.Context, req model.Personals) (res bool, errs errors.IError) {
-	if req.UserTypeId == constant.PersonalTypeAdminID {
-		res = true
+func (impl *UserUsecase) CheckAdmin(ctx *context.Context, req model.Sessions) (res bool, errs errors.IError) {
+	for _, peran := range req.IDPeran {
+		if peran == constant.PersonalTypeAdminID {
+			res = true
+			return
+		}
 	}
 	return
 }
 
-func (impl *UserUsecase) CheckLecturer(ctx *context.Context, req model.Personals) (res bool, errs errors.IError) {
-	if req.UserTypeId == constant.PersonalTypeLecturerID {
-		res = true
+func (impl *UserUsecase) CheckLecturer(ctx *context.Context, req model.Sessions) (res bool, errs errors.IError) {
+	for _, peran := range req.IDPeran {
+		if peran == constant.PersonalTypeLecturerID {
+			res = true
+			return
+		}
 	}
 	return
 }

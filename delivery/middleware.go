@@ -17,7 +17,7 @@ func (impl *Deliveries) CheckSession(ctx *context.Context) errors.IError {
 		return errors.New(constant.ErrorUnauthorized)
 	}
 
-	ctx.Input.SetData(constant.ContextUserID, personalData.ID)
+	ctx.Input.SetData(constant.ContextUserID, personalData.IDPersonal)
 
 	return nil
 }
@@ -38,7 +38,7 @@ func (impl *Deliveries) CheckLecturer(ctx *context.Context) errors.IError {
 		return errors.New(constant.ErrorNoPermission)
 	}
 
-	ctx.Input.SetData(constant.ContextUserID, personalData.ID)
+	ctx.Input.SetData(constant.ContextUserID, personalData.IDPersonal)
 	return nil
 }
 
@@ -58,6 +58,6 @@ func (impl *Deliveries) CheckAdmin(ctx *context.Context) errors.IError {
 		return errors.New(constant.ErrorNoPermission)
 	}
 
-	ctx.Input.SetData(constant.ContextUserID, personalData.ID)
+	ctx.Input.SetData(constant.ContextUserID, personalData.IDPersonal)
 	return nil
 }
