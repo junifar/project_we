@@ -35,13 +35,6 @@ func WriteResponse(controller *web.Controller, errs errors.IError, response inte
 	controller.Ctx.ResponseWriter.Header().Add("Content-Type", "application/json")
 	var errResponse Error
 
-	if errs != nil {
-		errResponse.StatusCode = errs.GetCustomCode()
-		errResponse.Message = errs.GetCustomMessage()
-
-		controller.Ctx.ResponseWriter.WriteHeader(errs.GetHTTPCode())
-	}
-
 	//set latency
 	birthTime := controller.Ctx.Input.GetData(constant.ContextBirthTime).(time.Time)
 	latency := time.Since(birthTime).Seconds() * 1000
@@ -53,6 +46,13 @@ func WriteResponse(controller *web.Controller, errs errors.IError, response inte
 			RequestUUID: controller.Ctx.Input.GetData(constant.ContextUUID).(string),
 		},
 		Data: response,
+	}
+	if errs != nil {
+		errResponse.StatusCode = errs.GetCustomCode()
+		errResponse.Message = errs.GetCustomMessage()
+
+		controller.Ctx.ResponseWriter.WriteHeader(errs.GetHTTPCode())
+		responseModel.Error = errResponse
 	}
 
 	resp, _ := json.Marshal(responseModel)

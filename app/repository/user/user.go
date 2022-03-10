@@ -9,12 +9,26 @@ import (
 type IUser interface {
 	IPersonal
 	ISession
+	IdentitasPengguna
+	IPeran
 }
 
 // IPersonal is personal repository interface
 type IPersonal interface {
-	SelectPersonal(ctx *context.Context, req model.Personals) (res []model.Personals, err error)
+	SelectPersonal(ctx *context.Context, req model.Personals, limit, page int) (res []model.Personals, err error)
 	InsertPersonal(ctx *context.Context, req model.Personals) (id int64, err error)
+
+	SelectPersonalByIDPersonal(ctx *context.Context, idPersonal int64) (res model.Personal, err error)
+	SelectPersonalByFilter(ctx *context.Context, filter model.PersonalFilter, limit, page int) (res []model.Personal, err error)
+}
+
+type IdentitasPengguna interface {
+	SelectIdentitasPenggunaByUserName(ctx *context.Context, username string) (res []model.IdentitasPengguna, err error)
+	InsertIdentitasPengguna(ctx *context.Context, req model.Personals) (id int64, err error)
+}
+
+type IPeran interface {
+	SelectPeranByIDPersonal(ctx *context.Context, idPersonal int64) (res []model.Peran, err error)
 }
 
 // ISession is session repository interface

@@ -40,3 +40,43 @@ func bindPersonal(ctx *context.Context, req *model.Personals) (errs errors.IErro
 
 	return nil
 }
+
+func bindPersonalList(ctx *context.Context, req *model.PersonalsPayload) (errs errors.IError) {
+	err := ctx.Input.Bind(&req.Personals.Username, "username")
+	if err != nil {
+		logs.Error("failed binding input", err)
+		return errors.New(constant.ErrorBindingParameter)
+	}
+
+	err = ctx.Input.Bind(&req.Personals.Name, "name")
+	if err != nil {
+		logs.Error("failed binding input", err)
+		return errors.New(constant.ErrorBindingParameter)
+	}
+
+	err = ctx.Input.Bind(&req.Personals.Password, "password")
+	if err != nil {
+		logs.Error("failed binding input", err)
+		return errors.New(constant.ErrorBindingParameter)
+	}
+
+	err = ctx.Input.Bind(&req.Personals.Username, "username")
+	if err != nil {
+		logs.Error("failed binding input", err)
+		return errors.New(constant.ErrorBindingParameter)
+	}
+
+	err = ctx.Input.Bind(&req.Limit, "limit")
+	if err != nil {
+		logs.Error("failed binding input", err)
+		return errors.New(constant.ErrorBindingParameter)
+	}
+
+	err = ctx.Input.Bind(&req.Page, "page")
+	if err != nil {
+		logs.Error("failed binding input", err)
+		return errors.New(constant.ErrorBindingParameter)
+	}
+
+	return nil
+}

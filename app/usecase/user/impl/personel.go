@@ -9,9 +9,19 @@ import (
 	"time"
 )
 
+func (impl *UserUsecase) ListPersonel(ctx *context.Context) (res []model.Personal, errs errors.IError) {
+	logs.Info("get personal list data")
+	res, err := impl.User.SelectPersonalByFilter(ctx, model.PersonalFilter{}, 0, 0)
+	if err != nil || len(res) == 0 {
+		logs.Error("failed get personal list data :", err)
+		return res, errors.New(constant.ErrorDataNotFoundDB)
+	}
+	return
+}
+
 func (impl *UserUsecase) CreatePersonel(ctx *context.Context, req model.Personals) (errs errors.IError) {
 	// TODO validate user input
-	userID := int64(0)
+	userID := ctx.Input.GetData(constant.ContextUserID).(int64)
 
 	now := time.Now()
 
@@ -29,9 +39,34 @@ func (impl *UserUsecase) CreatePersonel(ctx *context.Context, req model.Personal
 	return nil
 }
 
-func (impl *UserUsecase) CheckAdmin(ctx *context.Context, req model.Personals) (res bool, errs errors.IError) {
-	if req.UserTypeId == constant.PersonalTypeAdminID {
-		res = true
+func (impl *UserUsecase) CurrentUser(ctx *context.Context) (res model.Personal, errs errors.IError) {
+	userID := ctx.Input.GetData(constant.ContextUserID).(int64)
+
+	res, err := impl.User.SelectPersonalByIDPersonal(ctx, userID)
+	if err != nil {
+		logs.Error("failed get personal list data :", err)
+		return res, errors.New(constant.ErrorDataNotFoundDB)
+	}
+
+	return
+}
+
+func (impl *UserUsecase) CheckAdmin(ctx *context.Context, req model.Sessions) (res bool, errs errors.IError) {
+	for _, peran := range req.IDPeran {
+		if peran == constant.PersonalTypeAdminID {
+			res = true
+			return
+		}
+	}
+	return
+}
+
+func (impl *UserUsecase) CheckLecturer(ctx *context.Context, req model.Sessions) (res bool, errs errors.IError) {
+	for _, peran := range req.IDPeran {
+		if peran == constant.PersonalTypeLecturerID {
+			res = true
+			return
+		}
 	}
 	return
 }

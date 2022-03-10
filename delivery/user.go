@@ -28,8 +28,26 @@ func (impl *Deliveries) PersonalCreate() {
 	rsp.WriteResponse(&impl.Controller, nil, nil)
 }
 
+func (impl *Deliveries) CurrentUser() {
+	ctx := impl.Ctx
+	res, errs := impl.User.CurrentUser(ctx)
+	if errs != nil {
+		rsp.WriteResponse(&impl.Controller, errs, nil)
+		return
+	}
+
+	rsp.WriteResponse(&impl.Controller, nil, res)
+}
+
 func (impl *Deliveries) PersonalList() {
-	rsp.WriteResponse(&impl.Controller, nil, "test")
+	ctx := impl.Ctx
+	res, errs := impl.User.ListPersonel(ctx)
+	if errs != nil {
+		rsp.WriteResponse(&impl.Controller, errs, nil)
+		return
+	}
+
+	rsp.WriteResponse(&impl.Controller, nil, res)
 }
 
 // Login handler

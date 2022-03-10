@@ -14,12 +14,15 @@ type IUser interface {
 }
 
 type IPersonel interface {
-	CreatePersonel(ctx *context.Context, req model.Personals) (err errors.IError)
-	CheckAdmin(ctx *context.Context, req model.Personals) (res bool, errs errors.IError)
+	ListPersonel(ctx *context.Context) (res []model.Personal, errs errors.IError)
+	CurrentUser(ctx *context.Context) (res model.Personal, errs errors.IError)
+	CreatePersonel(ctx *context.Context, req model.Personals) (errs errors.IError)
+	CheckAdmin(ctx *context.Context, req model.Sessions) (res bool, errs errors.IError)
+	CheckLecturer(ctx *context.Context, req model.Sessions) (res bool, errs errors.IError)
 }
 
 type ISession interface {
-	CheckSession(ctx *context.Context, cookie string) (res model.Personals, err errors.IError)
+	CheckSession(ctx *context.Context, cookie string) (res model.Sessions, err errors.IError)
 }
 
 type IAuthorization interface {

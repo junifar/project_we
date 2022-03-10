@@ -17,8 +17,28 @@ func (impl *Deliveries) CheckSession(ctx *context.Context) errors.IError {
 		return errors.New(constant.ErrorUnauthorized)
 	}
 
-	ctx.Input.SetData(constant.ContextUserID, personalData.ID)
+	ctx.Input.SetData(constant.ContextUserID, personalData.IDPersonal)
 
+	return nil
+}
+
+func (impl *Deliveries) CheckLecturer(ctx *context.Context) errors.IError {
+	cookie, valid := ctx.GetSecureCookie(constant.CookieSecret, constant.CookieName)
+	if !valid {
+		return errors.New(constant.ErrorUnauthorized)
+	}
+
+	personalData, err := impl.User.CheckSession(ctx, cookie)
+	if err != nil {
+		return errors.New(constant.ErrorUnauthorized)
+	}
+
+	isLecturer, err := impl.User.CheckLecturer(ctx, personalData)
+	if err != nil || !isLecturer {
+		return errors.New(constant.ErrorNoPermission)
+	}
+
+	ctx.Input.SetData(constant.ContextUserID, personalData.IDPersonal)
 	return nil
 }
 
@@ -38,6 +58,6 @@ func (impl *Deliveries) CheckAdmin(ctx *context.Context) errors.IError {
 		return errors.New(constant.ErrorNoPermission)
 	}
 
-	ctx.Input.SetData(constant.ContextUserID, personalData.ID)
+	ctx.Input.SetData(constant.ContextUserID, personalData.IDPersonal)
 	return nil
 }

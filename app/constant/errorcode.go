@@ -20,6 +20,7 @@ const (
 	ErrorLoginNeedOTP      = 40011
 	ErrorNoPermission      = 40012
 	ErrorDataConversion    = 40013
+	ErrorPeranDoesntExist  = 40014
 )
 
 // error code server error response (5xxxx)
@@ -39,6 +40,7 @@ var (
 			{CustomCode: ErrorDataNotFoundCache, HTTPCode: http.StatusBadRequest, CustomMessage: "data not found on cache"},
 			{CustomCode: ErrorUserIsExist, HTTPCode: http.StatusBadRequest, CustomMessage: "user is exist on database"},
 			{CustomCode: ErrorUserDoesntExist, HTTPCode: http.StatusBadRequest, CustomMessage: "user does not exist on database"},
+			{CustomCode: ErrorPeranDoesntExist, HTTPCode: http.StatusBadRequest, CustomMessage: "peran does not exist on database"},
 			{CustomCode: ErrorIncorrectOTP, HTTPCode: http.StatusBadRequest, CustomMessage: "otp is incorrect"},
 			{CustomCode: ErrorIncorrectPassword, HTTPCode: http.StatusBadRequest, CustomMessage: "password is incorrect"},
 			{CustomCode: ErrorUnauthorized, HTTPCode: http.StatusForbidden, CustomMessage: "unauthorized, please login first"},
