@@ -1,5 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS "pengguna";
 CREATE SCHEMA IF NOT EXISTS "tkt";
+CREATE SCHEMA IF NOT EXISTS "pdpt";
 
 DROP TABLE IF EXISTS pengguna."identitas_pengguna";
 DROP SEQUENCE IF EXISTS pengguna.identitas_pengguna_seq;
@@ -110,6 +111,7 @@ CREATE TABLE "tkt"."personal"
 (
     "id_personal"      bigint    DEFAULT nextval('pengguna.personal_seq') NOT NULL,
     "id_personal_uuid" bigint,
+    "nama"             character varying(100),
     "nomor_ktp"        character varying(25),
     "alamat"           character varying(200),
     "tempat_lahir"     character varying(100),
@@ -118,10 +120,37 @@ CREATE TABLE "tkt"."personal"
     "nomor_hp"         character varying(20),
     "surel"            character varying(200),
     "website_personal" character varying(100),
+    "id_institusi"     bigint,
     "tgl_updated"      timestamp DEFAULT current_timestamp                NOT NULL,
     "tgl_created"      timestamp DEFAULT current_timestamp                NOT NULL,
     CONSTRAINT "personal_pkey" PRIMARY KEY (id_personal)
 );
 CREATE INDEX personal_id_personal_idx ON tkt.personal (id_personal);
+
+DROP TABLE IF EXISTS pdpt."dosen";
+DROP SEQUENCE IF EXISTS pdpt.dosen_seq;
+CREATE SEQUENCE pdpt.dosen_seq;
+CREATE TABLE pdpt."dosen"
+(
+    "nidn"                                character(10)                       NOT NULL,
+    "golongan"                            character varying(5)                NOT NULL,
+    "pangkat"                             character varying(15)               NOT NULL,
+    "kd_perguruan_tinggi"                 character(5)                        NOT NULL,
+    "id_program_studi"                    bigint                              NOT NULL,
+    "id_fakultas"                         bigint                              NOT NULL,
+    "id_jurusan"                          bigint                              NOT NULL,
+    "kd_sts_aktif"                        character(1)                        NOT NULL,
+    "kd_jenjang_pendidikan_program_studi" character(1)                        NOT NULL,
+    "id_personal"                         bigint                              NOT NULL,
+    "id_jenjang_pendidikan_tertinggi"     bigint                              NOT NULL,
+    "no_sertifikat_dosen"                 character varying(15)               NOT NULL,
+    "id_jabatan_fungsional"               int                                 NOT NULL,
+    "no_pegawai"                          character varying(20)               NOT NULL,
+    "id_pdpt"                             bigint                              NOT NULL,
+    "tgl_updated"                         timestamp DEFAULT current_timestamp NOT NULL,
+    "tgl_created"                         timestamp DEFAULT current_timestamp NOT NULL,
+    CONSTRAINT "dosen_pkey" PRIMARY KEY (nidn)
+);
+CREATE INDEX nidn_dosen_idx ON pdpt.dosen (nidn);
 
 

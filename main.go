@@ -39,6 +39,7 @@ func main() {
 	ucList := usecase.Init(usecase.Repository{
 		LocationRP: rpList.LocationRP,
 		UserRP:     rpList.UserRP,
+		DosenRP:    rpList.DosenRP,
 	})
 
 	// initialize delivery

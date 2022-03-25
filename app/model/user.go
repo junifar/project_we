@@ -28,6 +28,7 @@ type Peran struct {
 
 type Personal struct {
 	IdPersonal      int64
+	Nama            string
 	NomorKtp        string
 	Alamat          string
 	TempatLahir     string
@@ -36,6 +37,7 @@ type Personal struct {
 	NomorHp         string
 	Surel           string
 	WebsitePersonal string
+	IdInstitusi     int64
 	TglCreated      time.Time
 	TglUpdated      time.Time
 }
