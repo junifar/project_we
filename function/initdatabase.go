@@ -10,8 +10,8 @@ import (
 // InitDB is function to initiation database
 func InitDB() error {
 	dbAlias := "default"
-	force := false
-	verbose := true
+	//force := false
+	//verbose := true
 	driverName := "postgres"
 
 	err := orm.RegisterDriver(driverName, orm.DRPostgres)
@@ -32,11 +32,11 @@ func InitDB() error {
 		return err
 	}
 
-	err = orm.RunSyncdb(dbAlias, force, verbose)
-	if err != nil {
-		logs.Error("failed running syncronization database :", err)
-		return err
-	}
+	//err = orm.RunSyncdb(dbAlias, force, verbose)
+	//if err != nil {
+	//	logs.Error("failed running syncronization database :", err)
+	//	return err
+	//}
 
 	return nil
 }
