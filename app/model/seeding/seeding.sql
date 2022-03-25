@@ -62,5 +62,5 @@ INSERT INTO pengguna.peran_pengguna (id_personal, id_peran, kd_sts_peran_penggun
 INSERT INTO pengguna.peran_pengguna (id_personal, id_peran, kd_sts_peran_pengguna, is_default, is_peran_digunakan, tgl_updated, tgl_created) VALUES (2, 37, '1', 1, 1, now(), now());
 
 -- personal
-INSERT INTO pengguna.personal (id_personal, id_personal_uuid, nomor_ktp, alamat, tempat_lahir, tanggal_lahir, nomor_telepon, nomor_hp, surel, website_personal, tgl_updated, tgl_created) VALUES (1, null, '1', 'jakarta', 'jakarta', null, null, null, null, null, now(), now());
-INSERT INTO pengguna.personal (id_personal, id_personal_uuid, nomor_ktp, alamat, tempat_lahir, tanggal_lahir, nomor_telepon, nomor_hp, surel, website_personal, tgl_updated, tgl_created) VALUES (2, null, '1', 'jakarta', 'jakarta', null, null, null, null, null, now(), now());
+INSERT INTO tkt.personal (id_personal, id_personal_uuid, nomor_ktp, alamat, tempat_lahir, tanggal_lahir, nomor_telepon, nomor_hp, surel, website_personal, tgl_updated, tgl_created) VALUES (1, null, '1', 'jakarta', 'jakarta', null, null, null, null, null, now(), now());
+INSERT INTO tkt.personal (id_personal, id_personal_uuid, nomor_ktp, alamat, tempat_lahir, tanggal_lahir, nomor_telepon, nomor_hp, surel, website_personal, tgl_updated, tgl_created) VALUES (2, null, '1', 'jakarta', 'jakarta', null, null, null, null, null, now(), now());

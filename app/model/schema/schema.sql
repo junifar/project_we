@@ -103,10 +103,10 @@ CREATE TABLE tkt."jenis_institusi"
 );
 CREATE INDEX jenis_insatitusi_kd_jenis_institusi_idx ON tkt.jenis_institusi (kd_jenis_institusi);
 
-DROP TABLE IF EXISTS pengguna."personal";
-DROP SEQUENCE IF EXISTS pengguna.personal_seq;
-CREATE SEQUENCE pengguna.personal_seq;
-CREATE TABLE "pengguna"."personal"
+DROP TABLE IF EXISTS tkt."personal";
+DROP SEQUENCE IF EXISTS tkt.personal_seq;
+CREATE SEQUENCE tkt.personal_seq;
+CREATE TABLE "tkt"."personal"
 (
     "id_personal"      bigint    DEFAULT nextval('pengguna.personal_seq') NOT NULL,
     "id_personal_uuid" bigint,
@@ -122,6 +122,6 @@ CREATE TABLE "pengguna"."personal"
     "tgl_created"      timestamp DEFAULT current_timestamp                NOT NULL,
     CONSTRAINT "personal_pkey" PRIMARY KEY (id_personal)
 );
-CREATE INDEX personal_id_personal_idx ON pengguna.personal (id_personal);
+CREATE INDEX personal_id_personal_idx ON tkt.personal (id_personal);
 
 
