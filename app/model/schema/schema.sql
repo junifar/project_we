@@ -168,12 +168,12 @@ CREATE TABLE tkt.institusi
     fax                varchar(100),
     surel              varchar(100),
     website            varchar(100),
-    id_pdpt            uuid,
+    id_pdpt            bigint,
     tgl_created        timestamp,
     tgl_updated        timestamp,
     kd_sts_aktif       char,
     level              smallint,
-    id_institusi_induk uuid,
+    id_institusi_induk bigint,
     token_verifikasi   varchar(32),
     CONSTRAINT "institusi_pkey" PRIMARY KEY (id_institusi)
 );
@@ -192,7 +192,7 @@ CREATE TABLE pdpt.program_studi
     tgl_updated           timestamp default now()                             not null,
     kd_sts_aktif          char      default 1                                 not null,
     kd_jenjang_pendidikan integer,
-    id_program_studi_pdpt uuid,
+    id_program_studi_pdpt bigint,
     kd_program_pendidikan integer,
     CONSTRAINT "program_study_pkey" PRIMARY KEY (id_program_studi)
 );
@@ -207,11 +207,11 @@ create table pdpt.jenjang_pendidikan
     id_jenjang_pendidikan bigint    DEFAULT nextval('pdpt.jenjang_pendidikan_seq') NOT NULL,
     jenjang_pendidikan    varchar(50),
     degree                varchar(50),
-    tgl_created           timestamp default now() not null,
-    tgl_updated           timestamp default now() not null,
-    kd_sts_aktif          char      default 1     not null,
+    tgl_created           timestamp default now()                                  not null,
+    tgl_updated           timestamp default now()                                  not null,
+    kd_sts_aktif          char      default 1                                      not null,
     id_tingkat_pendidikan integer,
-        CONSTRAINT "jenjang_pendidikan_pkey" PRIMARY KEY (id_jenjang_pendidikan)
+    CONSTRAINT "jenjang_pendidikan_pkey" PRIMARY KEY (id_jenjang_pendidikan)
 );
 create index if not exists jenjang_pendidikan_kode_jenjang_pendidikan_idx on pdpt.jenjang_pendidikan (id_jenjang_pendidikan);
 
