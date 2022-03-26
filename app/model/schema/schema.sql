@@ -153,4 +153,65 @@ CREATE TABLE pdpt."dosen"
 );
 CREATE INDEX nidn_dosen_idx ON pdpt.dosen (nidn);
 
+DROP TABLE IF EXISTS tkt.institusi;
+DROP SEQUENCE IF EXISTS tkt.institusi_seq;
+CREATE SEQUENCE tkt.institusi_seq;
+CREATE TABLE tkt.institusi
+(
+    id_institusi       bigint DEFAULT nextval('tkt.institusi_seq') NOT NULL,
+    kd_jenis_institusi char(2),
+    nama_institusi     varchar(150),
+    alamat             varchar(200),
+    kd_kota            char(5),
+    kd_pos             char(5),
+    telepon            varchar(100),
+    fax                varchar(100),
+    surel              varchar(100),
+    website            varchar(100),
+    id_pdpt            uuid,
+    tgl_created        timestamp,
+    tgl_updated        timestamp,
+    kd_sts_aktif       char,
+    level              smallint,
+    id_institusi_induk uuid,
+    token_verifikasi   varchar(32),
+    CONSTRAINT "institusi_pkey" PRIMARY KEY (id_institusi)
+);
+CREATE INDEX id_institusi_institusi_idx ON tkt.institusi (id_institusi);
+
+DROP TABLE IF EXISTS pdpt.program_studi;
+DROP SEQUENCE IF EXISTS pdpt.program_studi_seq;
+CREATE SEQUENCE pdpt.program_studi_seq;
+CREATE TABLE pdpt.program_studi
+(
+    id_program_studi      bigint    DEFAULT nextval('pdpt.program_studi_seq') NOT NULL,
+    kd_program_studi      char(6)                                             not null,
+    kd_perguruan_tinggi   char(6)                                             not null,
+    nama_program_studi    varchar(100),
+    tgl_created           timestamp default now()                             not null,
+    tgl_updated           timestamp default now()                             not null,
+    kd_sts_aktif          char      default 1                                 not null,
+    kd_jenjang_pendidikan integer,
+    id_program_studi_pdpt uuid,
+    kd_program_pendidikan integer,
+    CONSTRAINT "program_study_pkey" PRIMARY KEY (id_program_studi)
+);
+create index program_studi_id_program_studi_idx on pdpt.program_studi (id_program_studi);
+create index program_studi_kode_perguruan_tinggi_idx on pdpt.program_studi (kd_perguruan_tinggi);
+
+DROP TABLE IF EXISTS pdpt.jenjang_pendidikan;
+DROP SEQUENCE IF EXISTS pdpt.jenjang_pendidikan_seq;
+CREATE SEQUENCE pdpt.jenjang_pendidikan_seq;
+create table pdpt.jenjang_pendidikan
+(
+    id_jenjang_pendidikan bigint    DEFAULT nextval('pdpt.jenjang_pendidikan_seq') NOT NULL,
+    jenjang_pendidikan    varchar(50),
+    degree                varchar(50),
+    tgl_created           timestamp default now() not null,
+    tgl_updated           timestamp default now() not null,
+    kd_sts_aktif          char      default 1     not null,
+    id_tingkat_pendidikan integer,
+        CONSTRAINT "jenjang_pendidikan_pkey" PRIMARY KEY (id_jenjang_pendidikan)
+);
+create index if not exists jenjang_pendidikan_kode_jenjang_pendidikan_idx on pdpt.jenjang_pendidikan (id_jenjang_pendidikan);
 
