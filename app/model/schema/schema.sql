@@ -109,7 +109,7 @@ DROP SEQUENCE IF EXISTS tkt.personal_seq;
 CREATE SEQUENCE tkt.personal_seq;
 CREATE TABLE "tkt"."personal"
 (
-    "id_personal"      bigint    DEFAULT nextval('pengguna.personal_seq') NOT NULL,
+    "id_personal"      bigint    DEFAULT nextval('tkt.personal_seq') NOT NULL,
     "id_personal_uuid" bigint,
     "nama"             character varying(100),
     "nomor_ktp"        character varying(25),
