@@ -1,5 +1,6 @@
 module project_we
 
+// +heroku goVersion go1.17
 go 1.17
 
 require (
