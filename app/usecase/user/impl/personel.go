@@ -49,9 +49,18 @@ func (impl *UserUsecase) CurrentUser(ctx *context.Context) (res userucm.UserResp
 		return res, errors.New(constant.ErrorDataNotFoundDB)
 	}
 
+	institusiData, err := impl.Institusi.GetInstitusiByInstitusiID(ctx, personalData.IdInstitusi)
+	if err != nil {
+		logs.Error("failed get institusi list data :", err)
+		return res, errors.New(constant.ErrorDataNotFoundDB)
+	}
+
 	if personalData.IdPersonal > 0 {
 		res.Nama = personalData.Nama
-		res.IdInstitusi = personalData.IdInstitusi
+		res.Institusi = userucm.Institusi{
+			IdInstitusi:   institusiData.IDInstitusi,
+			NamaInstitusi: institusiData.NamaInstitusi,
+		}
 		res.Alamat = personalData.Alamat
 		res.TempatLahir = personalData.TempatLahir
 		res.TanggalLahir = personalData.TanggalLahir

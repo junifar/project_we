@@ -31,7 +31,7 @@ type Repository struct {
 func Init(repository Repository) (res Usecase) {
 	res.LocationUC = locationuci.New(repository.LocationRP)
 	logs.Info("initialize usecase location")
-	res.UserUC = useruci.New(repository.UserRP, repository.DosenRP)
+	res.UserUC = useruci.New(repository.UserRP, repository.DosenRP, repository.InstitusiRP)
 	logs.Info("initialize usecase user")
 	return
 }

@@ -6,7 +6,7 @@ type (
 	UserResponse struct {
 		Nama                         string
 		NIDN                         string
-		IdInstitusi                  int64
+		Institusi                    Institusi
 		IdProgramStudi               int64
 		IdJenjangPendidikanTertinggi int64
 		Alamat                       string
@@ -17,5 +17,10 @@ type (
 		NomorHP                      string
 		Surel                        string
 		WebsitePersonal              string
+	}
+
+	Institusi struct {
+		IdInstitusi   int64
+		NamaInstitusi string
 	}
 )
