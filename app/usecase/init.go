@@ -3,6 +3,7 @@ package usecase
 import (
 	"github.com/beego/beego/v2/adapter/cache"
 	"github.com/beego/beego/v2/core/logs"
+	institusirp "project_we/app/repository/institusi"
 
 	dosenrp "project_we/app/repository/dosen"
 	locationrp "project_we/app/repository/location"
@@ -21,9 +22,10 @@ type Usecase struct {
 }
 
 type Repository struct {
-	LocationRP locationrp.ILocation
-	UserRP     userrp.IUser
-	DosenRP    dosenrp.IDosen
+	LocationRP  locationrp.ILocation
+	UserRP      userrp.IUser
+	DosenRP     dosenrp.IDosen
+	InstitusiRP institusirp.IInstitusi
 }
 
 func Init(repository Repository) (res Usecase) {

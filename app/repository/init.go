@@ -7,6 +7,8 @@ import (
 
 	dosenrp "project_we/app/repository/dosen"
 	dosenrpi "project_we/app/repository/dosen/impl"
+	institusirp "project_we/app/repository/institusi"
+	institusirpi "project_we/app/repository/institusi/impl"
 	locationrp "project_we/app/repository/location"
 	locationrpi "project_we/app/repository/location/impl"
 	userrp "project_we/app/repository/user"
@@ -19,9 +21,10 @@ type Dependencies struct {
 }
 
 type repositories struct {
-	LocationRP locationrp.ILocation
-	UserRP     userrp.IUser
-	DosenRP    dosenrp.IDosen
+	LocationRP  locationrp.ILocation
+	UserRP      userrp.IUser
+	DosenRP     dosenrp.IDosen
+	InstitusiRP institusirp.IInstitusi
 }
 
 func Init(dependencies Dependencies) (res repositories) {
@@ -31,5 +34,7 @@ func Init(dependencies Dependencies) (res repositories) {
 	logs.Info("initialize repository user")
 	res.DosenRP = dosenrpi.NewDosenRepository(dependencies.ORM)
 	logs.Info("initialize repository dosen")
+	res.InstitusiRP = institusirpi.NewInstitusiRepository(dependencies.ORM)
+	logs.Info("initialize repository institusi")
 	return
 }

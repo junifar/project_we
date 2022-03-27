@@ -36,6 +36,4 @@ func (d *dosenRepository) SelectDosenByPersonalID(ctx *context.Context, personal
 		return
 	}
 	return
-
-	return
 }
