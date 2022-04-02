@@ -5,7 +5,6 @@ import (
 	"github.com/beego/beego/v2/adapter/orm"
 	"github.com/beego/beego/v2/core/logs"
 	"github.com/beego/beego/v2/server/web"
-	"github.com/beego/beego/v2/server/web/filter/cors"
 	"os"
 
 	"project_we/app/repository"
@@ -54,15 +53,6 @@ func main() {
 	logs.Info("initialize delivery")
 
 	route.Init(deliveries)
-
-	web.InsertFilter("*", web.BeforeRouter, cors.Allow(&cors.Options{
-		AllowAllOrigins:  true,
-		AllowOrigins:     []string{"*"},
-		AllowCredentials: true,
-		AllowMethods:     []string{"GET", "POST"},
-		AllowHeaders:     []string{"Origin"},
-		ExposeHeaders:    []string{"Content-Length"},
-	}))
 
 	//web.Run()
 	logs.Info("Starting server at port %s\n", os.Getenv("PORT"))

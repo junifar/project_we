@@ -33,6 +33,10 @@ type Error struct {
 // WriteResponse is function to write the response
 func WriteResponse(controller *web.Controller, errs errors.IError, response interface{}) {
 	controller.Ctx.ResponseWriter.Header().Add("Content-Type", "application/json")
+	controller.Ctx.ResponseWriter.Header().Add("Access-Control-Allow-Origin", "*")
+	controller.Ctx.ResponseWriter.Header().Add("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT")
+	controller.Ctx.ResponseWriter.Header().Add("Access-Control-Allow-Headers", "Content-Type, X-CSRF-Token")
+
 	var errResponse Error
 
 	//set latency
@@ -62,6 +66,9 @@ func WriteResponse(controller *web.Controller, errs errors.IError, response inte
 // WriteResponseFilter is function to write the response for filter access
 func WriteResponseFilter(ctx *context.Context, errs errors.IError, response interface{}) {
 	ctx.ResponseWriter.Header().Add("Content-Type", "application/json")
+	ctx.ResponseWriter.Header().Add("Access-Control-Allow-Origin", "*")
+	ctx.ResponseWriter.Header().Add("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT")
+	ctx.ResponseWriter.Header().Add("Access-Control-Allow-Headers", "Content-Type, X-CSRF-Token")
 
 	var errResponse Error
 	if errs != nil {
