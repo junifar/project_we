@@ -10,6 +10,7 @@ const (
 								select 
 									   id_personal,
 									   id_personal_uuid,
+									   nama,
 									   nomor_ktp,
 									   alamat,
 									   tempat_lahir,
@@ -18,9 +19,10 @@ const (
 									   nomor_hp,
 									   surel,
 									   website_personal,
+									   id_institusi,
 									   tgl_updated,
 									   tgl_created
-								from pengguna.personal
+								from tkt.personal
 							`
 )
 

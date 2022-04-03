@@ -17,7 +17,19 @@ func InitCache() (cache.Cache, error) {
 		return nil, err
 	}
 
-	cache, err := cache.NewCache("redis", fmt.Sprintf(`{"conn":"%s"}`, cacheConnectionString))
+	cachePasswordString, err := config.String("redis::cachePassword")
+	if err != nil {
+		logs.Error("failed get config cache password :", err)
+		return nil, err
+	}
+
+	//cache, err := cache.NewCache("redis", fmt.Sprintf(`{"conn":"%s"}`, cacheConnectionString))
+	//if err != nil {
+	//	logs.Error("failed cache registering driver :", err)
+	//	return nil, err
+	//}
+
+	cache, err := cache.NewCache("redis", fmt.Sprintf(`{"conn":"%s","password":"%s"}`, cacheConnectionString, cachePasswordString))
 	if err != nil {
 		logs.Error("failed cache registering driver :", err)
 		return nil, err

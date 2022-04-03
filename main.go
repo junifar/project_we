@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"github.com/beego/beego/v2/adapter/orm"
 	"github.com/beego/beego/v2/core/logs"
 	"github.com/beego/beego/v2/server/web"
+	"os"
 
 	"project_we/app/repository"
 	"project_we/app/usecase"
@@ -37,8 +39,10 @@ func main() {
 
 	logs.Info("initialize usecase")
 	ucList := usecase.Init(usecase.Repository{
-		LocationRP: rpList.LocationRP,
-		UserRP:     rpList.UserRP,
+		LocationRP:  rpList.LocationRP,
+		UserRP:      rpList.UserRP,
+		DosenRP:     rpList.DosenRP,
+		InstitusiRP: rpList.InstitusiRP,
 	})
 
 	// initialize delivery
@@ -50,5 +54,7 @@ func main() {
 
 	route.Init(deliveries)
 
-	web.Run()
+	//web.Run()
+	logs.Info("Starting server at port %s\n", os.Getenv("PORT"))
+	web.Run(fmt.Sprintf(":%s", os.Getenv("PORT")))
 }
