@@ -1,13 +1,14 @@
 package impl
 
 import (
-	"github.com/beego/beego/v2/core/logs"
-	"github.com/beego/beego/v2/server/web/context"
 	"project_we/app/constant"
 	"project_we/app/model"
 	"project_we/app/pkg/errors"
 	userucm "project_we/app/usecase/user/model"
 	"time"
+
+	"github.com/beego/beego/v2/core/logs"
+	"github.com/beego/beego/v2/server/web/context"
 )
 
 func (impl *UserUsecase) ListPersonel(ctx *context.Context) (res []model.Personal, errs errors.IError) {
@@ -77,10 +78,20 @@ func (impl *UserUsecase) CurrentUser(ctx *context.Context) (res userucm.UserResp
 		return res, errors.New(constant.ErrorDataNotFoundDB)
 	}
 
+	jenjangPendidikanData, err := impl.JenjangPendidikan.GetJenjangPendidikanByJenjangPendidikanID(ctx, dosenData.IDJenjangPendidikanTertinggi)
+	if err != nil {
+		logs.Error("failed get jenjang pendidikan data :", err)
+		return res, errors.New(constant.ErrorDataNotFoundDB)
+	}
+
 	if dosenData.NIDN != "" {
 		res.NIDN = dosenData.NIDN
 		res.IdProgramStudi = dosenData.IDProgramStudi
-		res.IdJenjangPendidikanTertinggi = dosenData.IDJenjangPendidikanTertinggi
+
+		res.JenjangPendidikanTertinggi = userucm.JenjangPendidikanTertinggi{
+			IdJenjangPendidikanTertinggi:   dosenData.IDJenjangPendidikanTertinggi,
+			NamaJenjangPendidikanTertinggi: jenjangPendidikanData.JenjangPendidikan,
+		}
 	}
 
 	return

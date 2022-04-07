@@ -1,8 +1,9 @@
 package institusi
 
 import (
-	"github.com/beego/beego/v2/server/web/context"
 	"project_we/app/model"
+
+	"github.com/beego/beego/v2/server/web/context"
 )
 
 type IInstitusi interface {

@@ -68,3 +68,7 @@ INSERT INTO tkt.personal (id_personal, id_personal_uuid, nomor_ktp, alamat, temp
 -- dosen
 INSERT INTO pdpt.dosen (nidn, golongan, pangkat, kd_perguruan_tinggi, id_program_studi, id_fakultas, id_jurusan, kd_sts_aktif, kd_jenjang_pendidikan_program_studi, id_personal, id_jenjang_pendidikan_tertinggi, no_sertifikat_dosen, id_jabatan_fungsional, no_pegawai, id_pdpt, tgl_updated, tgl_created) VALUES ('2222', '1', '1', '1    ', 1, 1, 1, '1', '1', 2, 1, '1', 1, '1', 1, now(), now());
 
+-- jenjang pendidikan
+INSERT INTO pdpt.jenjang_pendidikan (jenjang_pendidikan, degree, tgl_created, tgl_updated, kd_sts_aktif) VALUES ('Test 1', 'Test Degree 1', now(), now(), 1);
+INSERT INTO pdpt.jenjang_pendidikan (jenjang_pendidikan, degree, tgl_created, tgl_updated, kd_sts_aktif) VALUES ('Test 2', 'Test Degree 2', now(), now(), 2);
+INSERT INTO pdpt.jenjang_pendidikan (jenjang_pendidikan, degree, tgl_created, tgl_updated, kd_sts_aktif) VALUES ('Test 3', 'Test Degree 3', now(), now(), 3);

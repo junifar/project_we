@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/beego/beego/v2/adapter/orm"
 	"github.com/beego/beego/v2/core/logs"
 	"github.com/beego/beego/v2/server/web"
-	"os"
 
 	"project_we/app/repository"
 	"project_we/app/usecase"
@@ -39,10 +40,11 @@ func main() {
 
 	logs.Info("initialize usecase")
 	ucList := usecase.Init(usecase.Repository{
-		LocationRP:  rpList.LocationRP,
-		UserRP:      rpList.UserRP,
-		DosenRP:     rpList.DosenRP,
-		InstitusiRP: rpList.InstitusiRP,
+		LocationRP:          rpList.LocationRP,
+		UserRP:              rpList.UserRP,
+		DosenRP:             rpList.DosenRP,
+		InstitusiRP:         rpList.InstitusiRP,
+		JenjangPendidikanRP: rpList.JenjangPendidikanRP,
 	})
 
 	// initialize delivery

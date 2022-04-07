@@ -1,9 +1,11 @@
 package usecase
 
 import (
+	institusirp "project_we/app/repository/institusi"
+	jenjangpendidikanrp "project_we/app/repository/jenjangpendidikan"
+
 	"github.com/beego/beego/v2/adapter/cache"
 	"github.com/beego/beego/v2/core/logs"
-	institusirp "project_we/app/repository/institusi"
 
 	dosenrp "project_we/app/repository/dosen"
 	locationrp "project_we/app/repository/location"
@@ -22,16 +24,17 @@ type Usecase struct {
 }
 
 type Repository struct {
-	LocationRP  locationrp.ILocation
-	UserRP      userrp.IUser
-	DosenRP     dosenrp.IDosen
-	InstitusiRP institusirp.IInstitusi
+	LocationRP          locationrp.ILocation
+	UserRP              userrp.IUser
+	DosenRP             dosenrp.IDosen
+	InstitusiRP         institusirp.IInstitusi
+	JenjangPendidikanRP jenjangpendidikanrp.IJenjangPendidikan
 }
 
 func Init(repository Repository) (res Usecase) {
 	res.LocationUC = locationuci.New(repository.LocationRP)
 	logs.Info("initialize usecase location")
-	res.UserUC = useruci.New(repository.UserRP, repository.DosenRP, repository.InstitusiRP)
+	res.UserUC = useruci.New(repository.UserRP, repository.DosenRP, repository.InstitusiRP, repository.JenjangPendidikanRP)
 	logs.Info("initialize usecase user")
 	return
 }
