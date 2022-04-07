@@ -84,9 +84,19 @@ func (impl *UserUsecase) CurrentUser(ctx *context.Context) (res userucm.UserResp
 		return res, errors.New(constant.ErrorDataNotFoundDB)
 	}
 
+	programStudiData, err := impl.ProgramStudi.GetProgramStudiByProgramStudiID(ctx, dosenData.IDProgramStudi)
+	if err != nil {
+		logs.Error("failed get program studi data :", err)
+		return res, errors.New(constant.ErrorDataNotFoundDB)
+	}
+
 	if dosenData.NIDN != "" {
 		res.NIDN = dosenData.NIDN
-		res.IdProgramStudi = dosenData.IDProgramStudi
+
+		res.ProgramStudi = userucm.ProgramStudi{
+			IdProgramStudi:   dosenData.IDProgramStudi,
+			NamaProgramStudi: programStudiData.NamaProgramStudi,
+		}
 
 		res.JenjangPendidikanTertinggi = userucm.JenjangPendidikanTertinggi{
 			IdJenjangPendidikanTertinggi:   dosenData.IDJenjangPendidikanTertinggi,

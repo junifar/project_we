@@ -72,3 +72,8 @@ INSERT INTO pdpt.dosen (nidn, golongan, pangkat, kd_perguruan_tinggi, id_program
 INSERT INTO pdpt.jenjang_pendidikan (jenjang_pendidikan, degree, tgl_created, tgl_updated, kd_sts_aktif) VALUES ('Test 1', 'Test Degree 1', now(), now(), 1);
 INSERT INTO pdpt.jenjang_pendidikan (jenjang_pendidikan, degree, tgl_created, tgl_updated, kd_sts_aktif) VALUES ('Test 2', 'Test Degree 2', now(), now(), 2);
 INSERT INTO pdpt.jenjang_pendidikan (jenjang_pendidikan, degree, tgl_created, tgl_updated, kd_sts_aktif) VALUES ('Test 3', 'Test Degree 3', now(), now(), 3);
+
+-- program studi
+INSERT INTO pdpt.program_studi (kd_program_studi, kd_perguruan_tinggi, nama_program_studi, tgl_created, tgl_updated, kd_sts_aktif, kd_jenjang_pendidikan, id_program_studi_pdpt, kd_program_pendidikan) VALUES (1, 1, 'Test Program Studi 1', now(), now(), 1, 1, 1, 1);
+INSERT INTO pdpt.program_studi (kd_program_studi, kd_perguruan_tinggi, nama_program_studi, tgl_created, tgl_updated, kd_sts_aktif, kd_jenjang_pendidikan, id_program_studi_pdpt, kd_program_pendidikan) VALUES (2, 2, 'Test Program Studi 2', now(), now(), 1, 2, 2, 2);
+INSERT INTO pdpt.program_studi (kd_program_studi, kd_perguruan_tinggi, nama_program_studi, tgl_created, tgl_updated, kd_sts_aktif, kd_jenjang_pendidikan, id_program_studi_pdpt, kd_program_pendidikan) VALUES (3, 3, 'Test Program Studi 3', now(), now(), 1, 3, 3, 3);

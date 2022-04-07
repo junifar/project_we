@@ -13,6 +13,8 @@ import (
 	jenjangpendidikanrpi "project_we/app/repository/jenjangpendidikan/impl"
 	locationrp "project_we/app/repository/location"
 	locationrpi "project_we/app/repository/location/impl"
+	programstudirp "project_we/app/repository/programstudi"
+	programstudirpi "project_we/app/repository/programstudi/impl"
 	userrp "project_we/app/repository/user"
 	userrpi "project_we/app/repository/user/impl"
 )
@@ -28,6 +30,7 @@ type repositories struct {
 	DosenRP             dosenrp.IDosen
 	InstitusiRP         institusirp.IInstitusi
 	JenjangPendidikanRP jenjangpendidikanrp.IJenjangPendidikan
+	ProgramStudiRP      programstudirp.IProgramStudi
 }
 
 func Init(dependencies Dependencies) (res repositories) {
@@ -41,5 +44,7 @@ func Init(dependencies Dependencies) (res repositories) {
 	logs.Info("initialize repository institusi")
 	res.JenjangPendidikanRP = jenjangpendidikanrpi.NewJenjangPendidikanRepository(dependencies.ORM)
 	logs.Info("initialize repository jenjang pendidikan")
+	res.ProgramStudiRP = programstudirpi.NewProgramStudiRepository(dependencies.ORM)
+	logs.Info("initialize repository program studi")
 	return
 }

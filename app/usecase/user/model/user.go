@@ -7,7 +7,7 @@ type (
 		Nama                       string
 		NIDN                       string
 		Institusi                  Institusi
-		IdProgramStudi             int64
+		ProgramStudi               ProgramStudi
 		JenjangPendidikanTertinggi JenjangPendidikanTertinggi
 		Alamat                     string
 		TempatLahir                string
@@ -27,5 +27,10 @@ type (
 	JenjangPendidikanTertinggi struct {
 		IdJenjangPendidikanTertinggi   int64
 		NamaJenjangPendidikanTertinggi string
+	}
+
+	ProgramStudi struct {
+		IdProgramStudi   int64
+		NamaProgramStudi string
 	}
 )
