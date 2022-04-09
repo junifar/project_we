@@ -4,39 +4,39 @@ import "time"
 
 type (
 	UserResponse struct {
-		Nama                       string                     `json:"nama,omitempty"`
-		NIDN                       string                     `json:"nidn,omitempty"`
+		Nama                       string                     `json:"nama"`
+		NIDN                       string                     `json:"nidn"`
 		Institusi                  Institusi                  `json:"institusi"`
 		ProgramStudi               ProgramStudi               `json:"program_studi"`
 		JenjangPendidikanTertinggi JenjangPendidikanTertinggi `json:"jenjang_pendidikan_tertinggi"`
-		Alamat                     string                     `json:"alamat,omitempty"`
-		TempatLahir                string                     `json:"tempat_lahir,omitempty"`
+		Alamat                     string                     `json:"alamat"`
+		TempatLahir                string                     `json:"tempat_lahir"`
 		TanggalLahir               time.Time                  `json:"tanggal_lahir"`
-		NomorKTP                   string                     `json:"nomor_ktp,omitempty"`
-		NomorTelepon               string                     `json:"nomor_telepon,omitempty"`
-		NomorHP                    string                     `json:"nomor_hp,omitempty"`
-		Surel                      string                     `json:"surel,omitempty"`
-		WebsitePersonal            string                     `json:"website_personal,omitempty"`
+		NomorKTP                   string                     `json:"nomor_ktp"`
+		NomorTelepon               string                     `json:"nomor_telepon"`
+		NomorHP                    string                     `json:"nomor_hp"`
+		Surel                      string                     `json:"surel"`
+		WebsitePersonal            string                     `json:"website_personal"`
 		JabatanFungsional          JabatanFungsional          `json:"jabatan_fungsional"`
 	}
 
 	Institusi struct {
-		IdInstitusi   int64  `json:"id_institusi,omitempty"`
-		NamaInstitusi string `json:"nama_institusi,omitempty"`
+		IdInstitusi   int64  `json:"id_institusi"`
+		NamaInstitusi string `json:"nama_institusi"`
 	}
 
 	JenjangPendidikanTertinggi struct {
-		IdJenjangPendidikanTertinggi   int64  `json:"id_jenjang_pendidikan_tertinggi,omitempty"`
-		NamaJenjangPendidikanTertinggi string `json:"nama_jenjang_pendidikan_tertinggi,omitempty"`
+		IdJenjangPendidikanTertinggi   int64  `json:"id_jenjang_pendidikan_tertinggi"`
+		NamaJenjangPendidikanTertinggi string `json:"nama_jenjang_pendidikan_tertinggi"`
 	}
 
 	ProgramStudi struct {
-		IdProgramStudi   int64  `json:"id_program_studi,omitempty"`
-		NamaProgramStudi string `json:"nama_program_studi,omitempty"`
+		IdProgramStudi   int64  `json:"id_program_studi"`
+		NamaProgramStudi string `json:"nama_program_studi"`
 	}
 
 	JabatanFungsional struct {
-		IdJabatanFungsional int    `json:"id_jabatan_fungsional,omitempty"`
-		JabatanFungsional   string `json:"jabatan_fungsional,omitempty"`
+		IdJabatanFungsional int    `json:"id_jabatan_fungsional"`
+		JabatanFungsional   string `json:"jabatan_fungsional"`
 	}
 )
