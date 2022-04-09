@@ -77,3 +77,6 @@ INSERT INTO pdpt.jenjang_pendidikan (jenjang_pendidikan, degree, tgl_created, tg
 INSERT INTO pdpt.program_studi (kd_program_studi, kd_perguruan_tinggi, nama_program_studi, tgl_created, tgl_updated, kd_sts_aktif, kd_jenjang_pendidikan, id_program_studi_pdpt, kd_program_pendidikan) VALUES (1, 1, 'Test Program Studi 1', now(), now(), 1, 1, 1, 1);
 INSERT INTO pdpt.program_studi (kd_program_studi, kd_perguruan_tinggi, nama_program_studi, tgl_created, tgl_updated, kd_sts_aktif, kd_jenjang_pendidikan, id_program_studi_pdpt, kd_program_pendidikan) VALUES (2, 2, 'Test Program Studi 2', now(), now(), 1, 2, 2, 2);
 INSERT INTO pdpt.program_studi (kd_program_studi, kd_perguruan_tinggi, nama_program_studi, tgl_created, tgl_updated, kd_sts_aktif, kd_jenjang_pendidikan, id_program_studi_pdpt, kd_program_pendidikan) VALUES (3, 3, 'Test Program Studi 3', now(), now(), 1, 3, 3, 3);
+
+-- jabatan fungsional
+INSERT INTO pdpt.jabatan_fungsional (jabatan_fungsional, tgl_created, tgl_updated, kd_sts_aktif) VALUES ('Dosen', '2022-04-09 14:22:18.040294', '2022-04-09 14:22:18.040294', '1');

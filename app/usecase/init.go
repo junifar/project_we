@@ -2,6 +2,7 @@ package usecase
 
 import (
 	institusirp "project_we/app/repository/institusi"
+	jabatanfungsionalrp "project_we/app/repository/jabatanfungsional"
 	jenjangpendidikanrp "project_we/app/repository/jenjangpendidikan"
 	programstudirp "project_we/app/repository/programstudi"
 
@@ -31,12 +32,13 @@ type Repository struct {
 	InstitusiRP         institusirp.IInstitusi
 	JenjangPendidikanRP jenjangpendidikanrp.IJenjangPendidikan
 	ProgramStudiRP      programstudirp.IProgramStudi
+	JabatanFungsionalRP jabatanfungsionalrp.IJabatanFungsional
 }
 
 func Init(repository Repository) (res Usecase) {
 	res.LocationUC = locationuci.New(repository.LocationRP)
 	logs.Info("initialize usecase location")
-	res.UserUC = useruci.New(repository.UserRP, repository.DosenRP, repository.InstitusiRP, repository.JenjangPendidikanRP, repository.ProgramStudiRP)
+	res.UserUC = useruci.New(repository.UserRP, repository.DosenRP, repository.InstitusiRP, repository.JenjangPendidikanRP, repository.ProgramStudiRP, repository.JabatanFungsionalRP)
 	logs.Info("initialize usecase user")
 	return
 }

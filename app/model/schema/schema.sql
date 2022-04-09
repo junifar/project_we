@@ -215,3 +215,17 @@ create table pdpt.jenjang_pendidikan
 );
 create index if not exists jenjang_pendidikan_kode_jenjang_pendidikan_idx on pdpt.jenjang_pendidikan (id_jenjang_pendidikan);
 
+DROP TABLE IF EXISTS pdpt.jabatan_fungsional;
+DROP SEQUENCE IF EXISTS pdpt.jabatan_fungsional_seq;
+CREATE SEQUENCE pdpt.jabatan_fungsional_seq;
+create table pdpt.jabatan_fungsional
+(
+    id_jabatan_fungsional bigint    DEFAULT nextval('pdpt.jabatan_fungsional_seq') NOT NULL,
+    jabatan_fungsional    varchar(50),
+    tgl_created           timestamp default now()                                  not null,
+    tgl_updated           timestamp default now()                                  not null,
+    kd_sts_aktif          char      default 1                                      not null,
+    CONSTRAINT "jabatan_fungsional_pkey" PRIMARY KEY (id_jabatan_fungsional)
+);
+create index if not exists jabatan_fungsional_id_jabatan_fungsional_idx on pdpt.jabatan_fungsional (id_jabatan_fungsional);
+

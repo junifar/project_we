@@ -46,6 +46,7 @@ func main() {
 		InstitusiRP:         rpList.InstitusiRP,
 		JenjangPendidikanRP: rpList.JenjangPendidikanRP,
 		ProgramStudiRP:      rpList.ProgramStudiRP,
+		JabatanFungsionalRP: rpList.JabatanFungsionalRP,
 	})
 
 	// initialize delivery

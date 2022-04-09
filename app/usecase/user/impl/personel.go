@@ -90,6 +90,12 @@ func (impl *UserUsecase) CurrentUser(ctx *context.Context) (res userucm.UserResp
 		return res, errors.New(constant.ErrorDataNotFoundDB)
 	}
 
+	jabatanFungsionalData, err := impl.JabatanFungsional.GetJabatanFungsionalByIDJabatanFungsional(ctx, dosenData.IDJabatanFungsional)
+	if err != nil {
+		logs.Error("failed get jabatan fungsional data :", err)
+		return res, errors.New(constant.ErrorDataNotFoundDB)
+	}
+
 	if dosenData.NIDN != "" {
 		res.NIDN = dosenData.NIDN
 
@@ -101,6 +107,11 @@ func (impl *UserUsecase) CurrentUser(ctx *context.Context) (res userucm.UserResp
 		res.JenjangPendidikanTertinggi = userucm.JenjangPendidikanTertinggi{
 			IdJenjangPendidikanTertinggi:   dosenData.IDJenjangPendidikanTertinggi,
 			NamaJenjangPendidikanTertinggi: jenjangPendidikanData.JenjangPendidikan,
+		}
+
+		res.JabatanFungsional = userucm.JabatanFungsional{
+			IdJabatanFungsional: jabatanFungsionalData.IdJabatanFungsional,
+			JabatanFungsional:   jabatanFungsionalData.JabatanFungsional,
 		}
 	}
 

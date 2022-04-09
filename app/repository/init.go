@@ -4,6 +4,8 @@ import (
 	"github.com/beego/beego/v2/adapter/cache"
 	"github.com/beego/beego/v2/adapter/orm"
 	"github.com/beego/beego/v2/core/logs"
+	jabatanfungsionalrp "project_we/app/repository/jabatanfungsional"
+	jabatanfungsionalrpi "project_we/app/repository/jabatanfungsional/impl"
 
 	dosenrp "project_we/app/repository/dosen"
 	dosenrpi "project_we/app/repository/dosen/impl"
@@ -31,6 +33,7 @@ type repositories struct {
 	InstitusiRP         institusirp.IInstitusi
 	JenjangPendidikanRP jenjangpendidikanrp.IJenjangPendidikan
 	ProgramStudiRP      programstudirp.IProgramStudi
+	JabatanFungsionalRP jabatanfungsionalrp.IJabatanFungsional
 }
 
 func Init(dependencies Dependencies) (res repositories) {
@@ -46,5 +49,7 @@ func Init(dependencies Dependencies) (res repositories) {
 	logs.Info("initialize repository jenjang pendidikan")
 	res.ProgramStudiRP = programstudirpi.NewProgramStudiRepository(dependencies.ORM)
 	logs.Info("initialize repository program studi")
+	res.JabatanFungsionalRP = jabatanfungsionalrpi.NewJabatanFungsionalRepository(dependencies.ORM)
+	logs.Info("initialize repository jabatan fungsional")
 	return
 }
