@@ -1,8 +1,9 @@
 package user
 
 import (
-	"github.com/beego/beego/v2/server/web/context"
 	"project_we/app/model"
+
+	"github.com/beego/beego/v2/server/web/context"
 )
 
 // IUser is user repository interface
@@ -17,6 +18,7 @@ type IUser interface {
 type IPersonal interface {
 	SelectPersonal(ctx *context.Context, req model.Personals, limit, page int) (res []model.Personals, err error)
 	InsertPersonal(ctx *context.Context, req model.Personals) (id int64, err error)
+	UpdatePersonal(ctx *context.Context, req model.Personal) (res model.Personal, err error)
 
 	SelectPersonalByIDPersonal(ctx *context.Context, idPersonal int64) (res model.Personal, err error)
 	SelectPersonalByFilter(ctx *context.Context, filter model.PersonalFilter, limit, page int) (res []model.Personal, err error)

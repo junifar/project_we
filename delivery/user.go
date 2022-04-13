@@ -1,11 +1,12 @@
 package delivery
 
 import (
-	"github.com/google/uuid"
 	"project_we/app/constant"
 	"project_we/app/model"
 	delivery "project_we/app/pkg/cookie"
 	rsp "project_we/app/pkg/response"
+
+	"github.com/google/uuid"
 )
 
 // PersonalCreate handler
@@ -26,6 +27,29 @@ func (impl *Deliveries) PersonalCreate() {
 	}
 
 	rsp.WriteResponse(&impl.Controller, nil, nil)
+}
+
+// Personel handler
+func (impl *Deliveries) PersonalUpdate() {
+	ctx := impl.Ctx
+
+	IDPersonal := ctx.Input.GetData(constant.ContextUserID).(int64)
+
+	req, errs := impl.User.GetPersonalByIDPersonal(ctx, IDPersonal)
+
+	errs = bindPersonalUpdate(ctx, &req)
+	if errs != nil {
+		rsp.WriteResponse(&impl.Controller, errs, nil)
+		return
+	}
+
+	res, errs := impl.User.UpdatePersonal(ctx, req)
+	if errs != nil {
+		rsp.WriteResponse(&impl.Controller, errs, nil)
+		return
+	}
+
+	rsp.WriteResponse(&impl.Controller, nil, res)
 }
 
 func (impl *Deliveries) CurrentUser() {
