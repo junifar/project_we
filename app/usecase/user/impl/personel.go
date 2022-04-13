@@ -41,6 +41,28 @@ func (impl *UserUsecase) CreatePersonel(ctx *context.Context, req model.Personal
 	return nil
 }
 
+func (impl *UserUsecase) GetPersonalByIDPersonal(ctx *context.Context, idPersonal int64) (model.Personal, errors.IError) {
+	res, err := impl.User.SelectPersonalByIDPersonal(ctx, idPersonal)
+	if err != nil {
+		logs.Error("failed insert personal data :", err)
+		return res, errors.New(constant.ErrorInternaly)
+	}
+
+	return res, nil
+}
+
+func (impl *UserUsecase) UpdatePersonal(ctx *context.Context, req model.Personal) (model.Personal, errors.IError) {
+	req.IdPersonal = ctx.Input.GetData(constant.ContextUserID).(int64)
+
+	res, err := impl.User.UpdatePersonal(ctx, req)
+	if err != nil {
+		logs.Error("failed update personal data :", err)
+		return res, errors.New(constant.ErrorInternaly)
+	}
+
+	return res, nil
+}
+
 func (impl *UserUsecase) CurrentUser(ctx *context.Context) (res userucm.UserResponse, errs errors.IError) {
 	userID := ctx.Input.GetData(constant.ContextUserID).(int64)
 

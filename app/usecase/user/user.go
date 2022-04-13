@@ -1,10 +1,11 @@
 package user
 
 import (
-	"github.com/beego/beego/v2/server/web/context"
 	"project_we/app/model"
 	"project_we/app/pkg/errors"
 	userucm "project_we/app/usecase/user/model"
+
+	"github.com/beego/beego/v2/server/web/context"
 )
 
 // IUser is user usecase interface
@@ -18,6 +19,8 @@ type IPersonel interface {
 	ListPersonel(ctx *context.Context) (res []model.Personal, errs errors.IError)
 	CurrentUser(ctx *context.Context) (res userucm.UserResponse, errs errors.IError)
 	CreatePersonel(ctx *context.Context, req model.Personals) (errs errors.IError)
+	GetPersonalByIDPersonal(ctx *context.Context, IDPersonal int64) (model.Personal, errors.IError)
+	UpdatePersonal(ctx *context.Context, req model.Personal) (model.Personal, errors.IError)
 	CheckAdmin(ctx *context.Context, req model.Sessions) (res bool, errs errors.IError)
 	CheckLecturer(ctx *context.Context, req model.Sessions) (res bool, errs errors.IError)
 }

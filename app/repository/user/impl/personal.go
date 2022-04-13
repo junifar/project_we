@@ -1,8 +1,9 @@
 package impl
 
 import (
-	"github.com/beego/beego/v2/server/web/context"
 	"project_we/app/model"
+
+	"github.com/beego/beego/v2/server/web/context"
 )
 
 const (
@@ -66,6 +67,25 @@ func (impl *UserRepository) InsertPersonal(ctx *context.Context, req model.Perso
 	}
 
 	return id, nil
+}
+
+func (impl *UserRepository) UpdatePersonal(ctx *context.Context, req model.Personal) (model.Personal, error) {
+	queryUpdate := `UPDATE tkt.personal
+	SET nomor_ktp = ?,
+	alamat = ?,
+	tempat_lahir = ?,
+	nomor_telepon = ?,
+	nomor_hp = ?,
+	surel = ?,
+	website_personal = ?
+	WHERE id_personal = ?`
+
+	_, err := impl.orm.Raw(queryUpdate, req.NomorKtp, req.Alamat, req.TempatLahir, req.NomorTelepon, req.NomorHp, req.Surel, req.WebsitePersonal, req.IdPersonal).Exec()
+	if err == nil {
+		return req, err
+	}
+
+	return req, nil
 }
 
 func (impl *UserRepository) SelectPersonalByIDPersonal(ctx *context.Context, idPersonal int64) (res model.Personal, err error) {
