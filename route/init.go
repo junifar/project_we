@@ -10,4 +10,5 @@ func Init(delivery *delivery.Deliveries) {
 	Common(delivery)
 	Location(delivery)
 	User(delivery)
+	Sinta(delivery)
 }

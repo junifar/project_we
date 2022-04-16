@@ -7,6 +7,7 @@ import (
 	"project_we/app/constant"
 	rsp "project_we/app/pkg/response"
 	locationuc "project_we/app/usecase/location"
+	sintauc "project_we/app/usecase/sinta"
 	useruc "project_we/app/usecase/user"
 	"time"
 )
@@ -16,12 +17,14 @@ type Deliveries struct {
 	web.Controller
 	Location locationuc.ILocation
 	User     useruc.IUser
+	Sinta    sintauc.ISinta
 }
 
 // Usecase is usecase dependencies
 type Usecase struct {
 	LocationUC locationuc.ILocation
 	UserUC     useruc.IUser
+	SintaUC    sintauc.ISinta
 }
 
 // New is delivery constructor
@@ -29,6 +32,7 @@ func New(usecase Usecase) *Deliveries {
 	return &Deliveries{
 		Location: usecase.LocationUC,
 		User:     usecase.UserUC,
+		Sinta:    usecase.SintaUC,
 	}
 }
 

@@ -4,8 +4,11 @@ import (
 	"github.com/beego/beego/v2/adapter/cache"
 	"github.com/beego/beego/v2/adapter/orm"
 	"github.com/beego/beego/v2/core/logs"
+	"project_we/app/pkg/curl"
 	jabatanfungsionalrp "project_we/app/repository/jabatanfungsional"
 	jabatanfungsionalrpi "project_we/app/repository/jabatanfungsional/impl"
+	sintarp "project_we/app/repository/sinta"
+	sintarpi "project_we/app/repository/sinta/impl"
 
 	dosenrp "project_we/app/repository/dosen"
 	dosenrpi "project_we/app/repository/dosen/impl"
@@ -24,6 +27,7 @@ import (
 type Dependencies struct {
 	ORM   orm.Ormer
 	Cache cache.Cache
+	Curl  curl.IHttpRequestor
 }
 
 type repositories struct {
@@ -34,6 +38,7 @@ type repositories struct {
 	JenjangPendidikanRP jenjangpendidikanrp.IJenjangPendidikan
 	ProgramStudiRP      programstudirp.IProgramStudi
 	JabatanFungsionalRP jabatanfungsionalrp.IJabatanFungsional
+	SintaRP             sintarp.ISinta
 }
 
 func Init(dependencies Dependencies) (res repositories) {
@@ -51,5 +56,7 @@ func Init(dependencies Dependencies) (res repositories) {
 	logs.Info("initialize repository program studi")
 	res.JabatanFungsionalRP = jabatanfungsionalrpi.NewJabatanFungsionalRepository(dependencies.ORM)
 	logs.Info("initialize repository jabatan fungsional")
+	res.SintaRP = sintarpi.NewSintaRepository(dependencies.ORM, dependencies.Curl)
+	logs.Info("initialize repository sinta")
 	return
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"project_we/builder"
 
 	"github.com/beego/beego/v2/adapter/orm"
 	"github.com/beego/beego/v2/core/logs"
@@ -36,6 +37,7 @@ func main() {
 	rpList := repository.Init(repository.Dependencies{
 		ORM:   orms,
 		Cache: cache,
+		Curl:  builder.BuildHTTPRequestor(),
 	})
 
 	logs.Info("initialize usecase")
@@ -47,12 +49,14 @@ func main() {
 		JenjangPendidikanRP: rpList.JenjangPendidikanRP,
 		ProgramStudiRP:      rpList.ProgramStudiRP,
 		JabatanFungsionalRP: rpList.JabatanFungsionalRP,
+		SintaRP:             rpList.SintaRP,
 	})
 
 	// initialize delivery
 	deliveries := delivery.New(delivery.Usecase{
 		LocationUC: ucList.LocationUC,
 		UserUC:     ucList.UserUC,
+		SintaUC:    ucList.SintaUC,
 	})
 	logs.Info("initialize delivery")
 
