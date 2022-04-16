@@ -121,8 +121,8 @@ CREATE TABLE "tkt"."personal"
     "surel"            character varying(200),
     "website_personal" character varying(100),
     "id_institusi"     bigint,
-    "tgl_updated"      timestamp DEFAULT current_timestamp                NOT NULL,
-    "tgl_created"      timestamp DEFAULT current_timestamp                NOT NULL,
+    "tgl_updated"      timestamp DEFAULT current_timestamp           NOT NULL,
+    "tgl_created"      timestamp DEFAULT current_timestamp           NOT NULL,
     CONSTRAINT "personal_pkey" PRIMARY KEY (id_personal)
 );
 CREATE INDEX personal_id_personal_idx ON tkt.personal (id_personal);
@@ -229,3 +229,25 @@ create table pdpt.jabatan_fungsional
 );
 create index if not exists jabatan_fungsional_id_jabatan_fungsional_idx on pdpt.jabatan_fungsional (id_jabatan_fungsional);
 
+DROP TABLE IF EXISTS sinta;
+DROP SEQUENCE IF EXISTS sinta_seq;
+CREATE SEQUENCE sinta_seq;
+create table if not exists sinta
+(
+    sinta_id                   bigint    DEFAULT nextval('sinta_seq') NOT NULL,
+    id_personal                bigint                                 not null,
+    id_sinta                   bigint                                 not null,
+    skor_sinta                 integer,
+    jml_artikel_google_scholar integer,
+    jml_sitasi_google_scholar  integer,
+    hindex_google_scholar      integer,
+    i_10_hindex_google_scholar integer,
+    id_google_scholar          varchar(50),
+    hindex                     integer,
+    jml_dokumen                integer,
+    jml_sitasi                 integer,
+    tgl_created                timestamp default now()                not null,
+    tgl_updated                timestamp default now()                not null,
+    CONSTRAINT "sinta_pkey" PRIMARY KEY (sinta_id)
+);
+create index if not exists sinta_id_personal_idx on sinta (id_personal);
