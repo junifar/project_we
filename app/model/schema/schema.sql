@@ -237,6 +237,7 @@ create table if not exists sinta
     sinta_id                   bigint    DEFAULT nextval('sinta_seq') NOT NULL,
     id_personal                bigint                                 not null,
     id_sinta                   bigint                                 not null,
+    id_scopus                  varchar(30),
     skor_sinta                 integer,
     jml_artikel_google_scholar integer,
     jml_sitasi_google_scholar  integer,

@@ -8,4 +8,5 @@ import (
 
 type ISinta interface {
 	SyncSinta(ctx *context.Context) (res sintaucm.SintaResponse, errs errors.IError)
+	GetSinta(ctx *context.Context) (res sintaucm.SintaResponse, errs errors.IError)
 }

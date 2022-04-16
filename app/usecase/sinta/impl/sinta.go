@@ -11,8 +11,43 @@ import (
 	"time"
 )
 
+func (impl *sintaUsecase) GetSinta(ctx *context.Context) (res sintaucm.SintaResponse, errs errors.IError) {
+	logs.Info("sync sinta data")
+	personalID := ctx.Input.GetData(constant.ContextUserID).(int64)
+
+	sintaData, err := impl.sintaRP.GetSintaByPersonalID(ctx, personalID)
+	if err != nil {
+		logs.Error("failed get sinta by personal id ", personalID, " with error : ", err)
+		return res, errors.New(constant.ErrorInternaly)
+	}
+
+	if len(sintaData) != 1 {
+		logs.Error("sinta data not correct by personal id ", personalID, " with error : ", err)
+		return res, errors.New(constant.ErrorInternaly)
+	}
+
+	res = sintaucm.SintaResponse{
+		IDSinta:   sintaData[0].SintaID,
+		SkorSinta: sintaData[0].SkorSinta,
+		Scopus: sintaucm.Scopus{
+			IDScopus:   sintaData[0].IDScopus,
+			Hindex:     sintaData[0].Hindex,
+			JmlDokumen: sintaData[0].JmlDokumen,
+			JmlSitasi:  sintaData[0].JmlSitasi,
+		},
+		GoogleScholar: sintaucm.GoogleScholar{
+			IDGoogleScholar:         sintaData[0].IDGoogleScholar,
+			HindexGoogleScholar:     sintaData[0].HindexGoogleScholar,
+			JmlArtikelGoogleScholar: sintaData[0].JmlArtikelGoogleScholar,
+			JmlSitasiGoogleScholar:  sintaData[0].JmlSitasiGoogleScholar,
+			I10HindexGoogleScholar:  sintaData[0].I10HindexGoogleScholar,
+		},
+	}
+	return
+}
+
 func (impl *sintaUsecase) SyncSinta(ctx *context.Context) (res sintaucm.SintaResponse, errs errors.IError) {
-	logs.Info("get sinta data")
+	logs.Info("sync sinta data")
 	personalID := ctx.Input.GetData(constant.ContextUserID).(int64)
 
 	result, err := impl.sintaRP.GetPartnerSinta(ctx, "0315117102")
@@ -43,6 +78,7 @@ func (impl *sintaUsecase) SyncSinta(ctx *context.Context) (res sintaucm.SintaRes
 		sintaPayload := model.Sinta{
 			IDPersonal:              personalID,
 			IDSinta:                 sintaID,
+			IDScopus:                result.Data.ScopusID,
 			SkorSinta:               skorSinta,
 			JmlArtikelGoogleScholar: jmlArtikelGoogleScholar,
 			JmlSitasiGoogleScholar:  jmlSitasiGoogleScholar,
@@ -79,7 +115,8 @@ func (impl *sintaUsecase) SyncSinta(ctx *context.Context) (res sintaucm.SintaRes
 	}
 
 	res = sintaucm.SintaResponse{
-		IDSinta:   sintaID,
+		IDSinta: sintaID,
+
 		SkorSinta: skorSinta,
 		Scopus: sintaucm.Scopus{
 			IDScopus:   result.Data.ScopusID,

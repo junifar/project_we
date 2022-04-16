@@ -12,3 +12,14 @@ func (impl *Deliveries) SyncSinta() {
 
 	rsp.WriteResponse(&impl.Controller, nil, res)
 }
+
+func (impl *Deliveries) GetSinta() {
+	ctx := impl.Ctx
+	res, errs := impl.Sinta.SyncSinta(ctx)
+	if errs != nil {
+		rsp.WriteResponse(&impl.Controller, errs, nil)
+		return
+	}
+
+	rsp.WriteResponse(&impl.Controller, nil, res)
+}

@@ -10,6 +10,7 @@ type Sinta struct {
 	SintaID                 int64     `orm:"column(sinta_id);pk;auto"`
 	IDPersonal              int64     `orm:"column(id_personal)"`
 	IDSinta                 int64     `orm:"column(id_sinta)"`
+	IDScopus                string    `orm:"column(id_scopus)"`
 	SkorSinta               int       `orm:"column(skor_sinta)"`
 	JmlArtikelGoogleScholar int       `orm:"column:(jml_artikel_google_scholar)"`
 	JmlSitasiGoogleScholar  int       `orm:"column(jml_sitasi_google_scholar)"`
