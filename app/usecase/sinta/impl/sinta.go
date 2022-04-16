@@ -72,7 +72,7 @@ func (impl *sintaUsecase) SyncSinta(ctx *context.Context) (res sintaucm.SintaRes
 		sintaData[0].JmlDokumen = jmlDokumen
 		sintaData[0].JmlSitasi = jmlSitasi
 		sintaData[0].TglUpdated = now
-		err := impl.sintaRP.InsertSinta(ctx, sintaData[0])
+		err := impl.sintaRP.UpdateSinta(ctx, sintaData[0])
 		if err != nil {
 			logs.Error("failed update sinta with error : ", err)
 			return res, errors.New(constant.ErrorInternaly)

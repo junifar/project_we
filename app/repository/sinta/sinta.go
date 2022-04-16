@@ -10,4 +10,5 @@ type ISinta interface {
 	GetPartnerSinta(ctx *context.Context, nidn string) (res sintarpm.SintaResponse, err error)
 	GetSintaByPersonalID(ctx *context.Context, personalID int64) (res []model.Sinta, err error)
 	InsertSinta(ctx *context.Context, payload model.Sinta) (err error)
+	UpdateSinta(ctx *context.Context, payload model.Sinta) (err error)
 }

@@ -10,7 +10,6 @@ import (
 	"net/http"
 	"project_we/app/model"
 	sintarpm "project_we/app/repository/sinta/model"
-	"time"
 )
 
 const (
@@ -76,11 +75,15 @@ func (impl *sintaRepository) GetSintaByPersonalID(ctx *context.Context, personal
 }
 
 func (impl *sintaRepository) InsertSinta(ctx *context.Context, payload model.Sinta) (err error) {
-	x := new(model.Sinta)
-	x.IDPersonal = 1
-	x.IDSinta = 1
-	x.TglCreated = time.Now()
-	x.TglUpdated = time.Now()
-	_, err = impl.orm.Insert(x)
+	dataPayload := new(model.Sinta)
+	dataPayload = &payload
+	_, err = impl.orm.Insert(dataPayload)
+	return
+}
+
+func (impl *sintaRepository) UpdateSinta(ctx *context.Context, payload model.Sinta) (err error) {
+	data := new(model.Sinta)
+	data = &payload
+	_, err = impl.orm.Update(data)
 	return
 }

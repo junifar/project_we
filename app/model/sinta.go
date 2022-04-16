@@ -7,7 +7,7 @@ import (
 )
 
 type Sinta struct {
-	SintaID                 int64     `orm:"column(sinta_id)"`
+	SintaID                 int64     `orm:"column(sinta_id);pk;auto"`
 	IDPersonal              int64     `orm:"column(id_personal)"`
 	IDSinta                 int64     `orm:"column(id_sinta)"`
 	SkorSinta               int       `orm:"column(skor_sinta)"`
