@@ -51,16 +51,22 @@ func (impl *UserUsecase) GetPersonalByIDPersonal(ctx *context.Context, idPersona
 	return res, nil
 }
 
-func (impl *UserUsecase) UpdatePersonal(ctx *context.Context, req model.Personal) (model.Personal, errors.IError) {
+func (impl *UserUsecase) UpdatePersonal(ctx *context.Context, req model.Personal) (resUser userucm.UserResponse, err errors.IError) {
 	req.IdPersonal = ctx.Input.GetData(constant.ContextUserID).(int64)
 
-	res, err := impl.User.UpdatePersonal(ctx, req)
-	if err != nil {
+	_, errUpdate := impl.User.UpdatePersonal(ctx, req)
+	if errUpdate != nil {
 		logs.Error("failed update personal data :", err)
-		return res, errors.New(constant.ErrorInternaly)
+		return resUser, errors.New(constant.ErrorInternaly)
 	}
 
-	return res, nil
+	resUser, err = impl.CurrentUser(ctx)
+	if err != nil {
+		logs.Error("failed get personal data :", err)
+		return resUser, errors.New(constant.ErrorInternaly)
+	}
+
+	return resUser, nil
 }
 
 func (impl *UserUsecase) CurrentUser(ctx *context.Context) (res userucm.UserResponse, errs errors.IError) {

@@ -20,7 +20,7 @@ type IPersonel interface {
 	CurrentUser(ctx *context.Context) (res userucm.UserResponse, errs errors.IError)
 	CreatePersonel(ctx *context.Context, req model.Personals) (errs errors.IError)
 	GetPersonalByIDPersonal(ctx *context.Context, IDPersonal int64) (model.Personal, errors.IError)
-	UpdatePersonal(ctx *context.Context, req model.Personal) (model.Personal, errors.IError)
+	UpdatePersonal(ctx *context.Context, req model.Personal) (userucm.UserResponse, errors.IError)
 	CheckAdmin(ctx *context.Context, req model.Sessions) (res bool, errs errors.IError)
 	CheckLecturer(ctx *context.Context, req model.Sessions) (res bool, errs errors.IError)
 }
