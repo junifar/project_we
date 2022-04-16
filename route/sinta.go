@@ -5,6 +5,11 @@ import (
 	"project_we/delivery"
 )
 
+func AccessSinta(delivery *delivery.Deliveries) {
+	web.InsertFilter("/v1/sinta/sync", web.BeforeRouter, delivery.MustLecturer)
+}
+
 func Sinta(delivery *delivery.Deliveries) {
-	web.Router("/v1/sinta", delivery, "get:SyncSinta")
+	AccessSinta(delivery)
+	web.Router("/v1/sinta/sync", delivery, "post:SyncSinta")
 }

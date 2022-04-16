@@ -13,8 +13,7 @@ import (
 
 func (impl *sintaUsecase) SyncSinta(ctx *context.Context) (res sintaucm.SintaResponse, errs errors.IError) {
 	logs.Info("get sinta data")
-	var personalID int64
-	personalID = 2
+	personalID := ctx.Input.GetData(constant.ContextUserID).(int64)
 
 	result, err := impl.sintaRP.GetPartnerSinta(ctx, "0315117102")
 	if err != nil {
